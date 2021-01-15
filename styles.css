@@ -1,0 +1,11 @@
+body, html {
+  margin: 0;
+  height: 100vh;
+}
+
+body {
+  background-image: url("./assets/pexels-marcus-vinícius-a-ribeiro-2825033.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
