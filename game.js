@@ -50,11 +50,20 @@ class Game {
   }
 
   slapCards(e) {
-    //conditionals for legal slaps (JACKS, doubles, sandwiches)
+    if (e.key === 'f') {
+      console.log("hello");
+      //check the legality of the slap
+      //fire corresponding firstPlayer method
+    } else if (e.key === 'j') {
+      console.log("goodbye");
+      //check the legalist of the slap
+      //fire corresponding secondPlayer method
+    }
   }
 
   updateWinCount(player) {
     //this will update player.wins property
   }
+
 
 }
