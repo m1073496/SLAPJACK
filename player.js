@@ -13,4 +13,4 @@ class Player {
     //this will save this.wins value to local storage
   }
 
-};
+}

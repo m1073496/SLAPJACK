@@ -2,7 +2,7 @@ class Game {
   constructor() {
     this.firstPlayer = new Player();
     this.secondPlayer = new Player();
-    this.allCards = [/*this should remain static throughout the course of the game*/];
+    this.allCards = allCards;
     this.cardsInDiscardPile = [];
     this.currentTurn = /*this will be overwritten frequently with either player1 or player2 instances at a given time */;
   }
@@ -31,4 +31,4 @@ class Game {
     //this will update player.wins property
   }
 
-};
+}
