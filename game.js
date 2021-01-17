@@ -40,14 +40,14 @@ class Game {
     this.secondPlayer = new Player();
   }
 
-  addToDiscardPile() {
-    //Currently, this method removes a card from both players' hands at the same time and adds them to the discard pile.
-    //This will need to change--- I need a conditional that will check for player keystroke(main.js)
-    //before taking a card from the correct player's hand.
+  addToDiscardPile(e) {
     //Need a conditional to check if player has cards left in hand before allowing playCard method to fire
     //Need to disallow calling this method unless cards have already been dealt
-    this.cardsInDiscardPile.push(this.firstPlayer.playCard());
-    this.cardsInDiscardPile.push(this.secondPlayer.playCard());
+    if (e.key === 'q') {
+      this.cardsInDiscardPile.push(this.firstPlayer.playCard());
+    } else if (e.key === 'p') {
+      this.cardsInDiscardPile.push(this.secondPlayer.playCard());
+    }
   }
 
   slapCards() {
