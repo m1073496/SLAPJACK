@@ -1,14 +1,18 @@
 class Game {
   constructor() {
-    this.firstPlayer = new Player();
-    this.secondPlayer = new Player();
+    // this.firstPlayer = new Player();
+    // this.secondPlayer = new Player();
     this.allCards = allCards;
     this.cardsInDiscardPile = [];
-    this.currentTurn = /*this will be overwritten frequently with either player1 or player2 instances at a given time */;
+    // this.currentTurn = /*this will be overwritten frequently with either player1 or player2 instances at a given time */;
   }
 
   shuffleDeck() {
-    //this will randomize the cards
+    for (var i = this.allCards.length -1; i > 0; i--) {
+      var randomIndex = Math.floor(Math.random() * (i + 1));
+      [this.allCards[i], this.allCards[randomIndex]] = [this.allCards[randomIndex], this.allCards[i]];
+    }
+    return this.allCards;
   }
 
   dealCards(player1, player2) {
