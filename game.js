@@ -50,6 +50,7 @@ class Game {
   }
 
   slapCards(e) {
+    //Need a conditional to disallow slapping if no cards in this.cardsInDiscardPile
     if (e.key === 'f') {
       console.log("hello");
       //check the legality of the slap
