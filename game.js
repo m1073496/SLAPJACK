@@ -9,7 +9,7 @@ class Game {
   }
 
   shuffleDeck() {
-    if (this.firstPlayer.hand.length === 0 && this.secondPlayer.hand.length === 0) {
+    if (this.cardsInPlay.length === 0 && this.firstPlayer.hand.length === 0 && this.secondPlayer.hand.length === 0) {
       for (var i = this.allCards.length -1; i >= 0; i--) {
         var randomIndex = Math.floor(Math.random() * (i + 1));
         [this.allCards[i], this.allCards[randomIndex]] = [this.allCards[randomIndex], this.allCards[i]];
@@ -34,6 +34,7 @@ class Game {
   startNewGame() {
     //this will reset the deck and players (perhaps a new card deck shuffle as well)
     this.allCards = allCards;
+    this.cardsInPlay = [];
     this.cardsInDiscardPile = [];
     this.firstPlayer = new Player();
     this.secondPlayer = new Player();
