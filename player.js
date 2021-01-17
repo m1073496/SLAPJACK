@@ -6,7 +6,7 @@ class Player {
   }
 
   playCard() {
-    //this will remove a card from this.hand array
+    return this.hand.splice(0, 1);
   }
 
   saveWinsToStorage() {
