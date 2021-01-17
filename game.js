@@ -17,7 +17,6 @@ class Game {
 
   dealCards() {
     var currentDeck = this.shuffleDeck();
-    console.log(currentDeck);
     for (var i = 0; i < currentDeck.length; i + 2) {
         this.firstPlayer.hand.push(currentDeck[i]);
         currentDeck.splice(i, 1);
@@ -29,6 +28,9 @@ class Game {
 
   startNewGame() {
     //this will reset the deck and players (perhaps a new card deck shuffle as well)
+    this.allCards = allCards;
+    this.firstPlayer = new Player();
+    this.secondPlayer = new Player();
   }
 
   discard(player) {
