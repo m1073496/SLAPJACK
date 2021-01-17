@@ -10,13 +10,24 @@ body {
   background-size: cover;
 }
 
-.win-msg {
+.header {
+  display: flex;
+  justify-content: center;
   height: 15vh;
-  padding-top: 10vh;
+  margin-top: 10vh;
+}
+
+.game-msg {
+  height: 80px;
+  background-color: rgba(0, 0, 0, 0.7);
+  text-shadow: 5px 2px 7px black;
+  border-radius: 10px;
+}
+
+.msg {
   text-align: center;
   color: white;
-  text-shadow: 5px 2px 7px black;
-  margin-bottom: 0;
+  padding: 5px, 3px, 5px, 3px;
 }
 
 .card-stacks-container {
@@ -26,7 +37,7 @@ body {
   height: 50vh;
   align-items: center;
   margin-bottom: 0;
-  margin-top: 0;
+  margin-top: 5vh;
 }
 
 .player-cards {
@@ -50,6 +61,7 @@ body {
   color: white;
   font-size: 150%;
   text-align: center;
+  text-shadow: 5px 2px 7px black;
 }
 
 
