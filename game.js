@@ -23,7 +23,6 @@ class Game {
         this.secondPlayer.hand.push(currentDeck[i]);
         currentDeck.splice(i, 1);
     }
-    this.secondPlayer.hand.pop();
   }
 
   startNewGame() {
@@ -37,6 +36,7 @@ class Game {
     //Currently, this method removes a card from both players' hands at the same time and adds them to the discard pile.
     //This will need to change--- I need a conditional that will check for player keystroke(main.js)
     //before taking a card from the correct player's hand.
+    //Need a conditional to check if player has cards left in hand before allowing playCard method to fire
     this.cardsInDiscardPile.push(this.firstPlayer.playCard());
     this.cardsInDiscardPile.push(this.secondPlayer.playCard());
   }

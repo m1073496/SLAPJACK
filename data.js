@@ -24,7 +24,6 @@ var allCards = [
 "Blue 04",
 "Red 08",
 "Blue 08",
-"Wild",
 "Red 09",
 "Blue Jack",
 "Gold Jack",
