@@ -42,15 +42,14 @@ class Game {
 
   addToDiscardPile(e) {
     //Need a conditional to check if player has cards left in hand before allowing playCard method to fire
-    //Need to disallow calling this method unless cards have already been dealt
-    if (e.key === 'q') {
+    if (e.key === 'q' && this.firstPlayer.hand.length != 0) {
       this.cardsInDiscardPile.push(this.firstPlayer.playCard());
-    } else if (e.key === 'p') {
+    } else if (e.key === 'p' && this.secondPlayer.hand.length != 0) {
       this.cardsInDiscardPile.push(this.secondPlayer.playCard());
     }
   }
 
-  slapCards() {
+  slapCards(e) {
     //conditionals for legal slaps (JACKS, doubles, sandwiches)
   }
 
