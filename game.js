@@ -8,11 +8,13 @@ class Game {
   }
 
   shuffleDeck() {
-    for (var i = this.allCards.length -1; i > 0; i--) {
+    this.cardsInPlay = [];
+    for (var i = this.allCards.length -1; i >= 0; i--) {
       var randomIndex = Math.floor(Math.random() * (i + 1));
       [this.allCards[i], this.allCards[randomIndex]] = [this.allCards[randomIndex], this.allCards[i]];
+      this.cardsInPlay.push(this.allCards[randomIndex]);
     }
-    return this.allCards;
+    return this.cardsInPlay;
   }
 
   dealCards() {
@@ -28,6 +30,7 @@ class Game {
   startNewGame() {
     //this will reset the deck and players (perhaps a new card deck shuffle as well)
     this.allCards = allCards;
+    this.cardsInDiscardPile = [];
     this.firstPlayer = new Player();
     this.secondPlayer = new Player();
   }
@@ -37,6 +40,7 @@ class Game {
     //This will need to change--- I need a conditional that will check for player keystroke(main.js)
     //before taking a card from the correct player's hand.
     //Need a conditional to check if player has cards left in hand before allowing playCard method to fire
+    //Need to disallow calling this method unless cards have already been dealt
     this.cardsInDiscardPile.push(this.firstPlayer.playCard());
     this.cardsInDiscardPile.push(this.secondPlayer.playCard());
   }
