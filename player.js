@@ -1,7 +1,7 @@
 class Player {
   constructor() {
     this.id = Date.now();
-    this.wins = /*integer*/;
+    this.wins = 0;
     this.hand = [];
   }
 

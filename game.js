@@ -1,7 +1,7 @@
 class Game {
   constructor() {
-    // this.firstPlayer = new Player();
-    // this.secondPlayer = new Player();
+    this.firstPlayer = new Player();
+    this.secondPlayer = new Player();
     this.allCards = allCards;
     this.cardsInDiscardPile = [];
     // this.currentTurn = /*this will be overwritten frequently with either player1 or player2 instances at a given time */;
@@ -15,8 +15,16 @@ class Game {
     return this.allCards;
   }
 
-  dealCards(player1, player2) {
-    //this will push cards into each player's player.hand array
+  dealCards() {
+    var currentDeck = this.shuffleDeck();
+    console.log(currentDeck);
+    for (var i = 0; i < currentDeck.length; i + 2) {
+        this.firstPlayer.hand.push(currentDeck[i]);
+        currentDeck.splice(i, 1);
+        this.secondPlayer.hand.push(currentDeck[i]);
+        currentDeck.splice(i, 1);
+    }
+    this.secondPlayer.hand.pop();
   }
 
   startNewGame() {
