@@ -7,21 +7,23 @@
     <title>SLAPJACK</title>
   </head>
   <body>
-    <header class="win-msg">
-      <h1 class="take-pile-msg">PLACEHOLDER TEXT</h1>
+    <header class="header">
+        <div class="game-msg">
+          <h1 class="msg">PLACEHOLDER TEXT</h1>
+        </div>
     </header>
-    <main>
-      <section class="card-stacks-container">
-        <div class="stack-one">
-        </div>
-        <div class="discard-pile">
-        </div>
-        <div class="stack-two">
-        </div>
+    <main class="card-stacks-container">
+      <section class="player-cards">
+        <article class="stack-one">
+        </article>
+        <h2 class="win-counter player-one"># Wins</h2>
       </section>
-      <section class="win-counter">
-        <p class="first-counter"># Wins</p>
-        <p class="second-counter"># Wins</p>
+      <article class="discard-pile">
+      </article>
+      <section class="player-cards">
+        <article class="stack-two">
+        </article>
+        <h2 class="win-counter player-two"># Wins</h2>
       </section>
     </main>
     <script src="./player.js"></script>

@@ -10,24 +10,38 @@ body {
   background-size: cover;
 }
 
-.win-msg {
+.header {
+  display: flex;
+  justify-content: center;
   height: 15vh;
-  padding-top: 10vh;
+  margin-top: 10vh;
+}
+
+.game-msg {
+  height: 80px;
+  background-color: rgba(0, 0, 0, 0.7);
+  text-shadow: 5px 2px 7px black;
+  border-radius: 10px;
+}
+
+.msg {
   text-align: center;
   color: white;
-  text-shadow: 5px 2px 7px black;
-  margin-bottom: 0;
+  padding: 5px, 3px, 5px, 3px;
 }
 
 .card-stacks-container {
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: space-around;
   height: 50vh;
   align-items: center;
-  margin: 8vh;
   margin-bottom: 0;
-  margin-top: 0;
+  margin-top: 5vh;
+}
+
+.player-cards {
+  margin-top: 68px;
 }
 
 .stack-one,
@@ -44,15 +58,10 @@ body {
 }
 
 .win-counter {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
   color: white;
-  font-size: 200%;
+  font-size: 150%;
   text-align: center;
-  margin-left: 16vh;
-  margin-right: 16vh;
-  margin-top: 0;
+  text-shadow: 5px 2px 7px black;
 }
 
 
