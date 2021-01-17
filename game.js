@@ -15,12 +15,12 @@ class Game {
     //this will push cards into each player's player.hand array
   }
 
-  resetDeck() {
-    //this will reset the deck and players
+  startNewGame() {
+    //this will reset the deck and players (perhaps a new card deck shuffle as well)
   }
 
   discard(player) {
-    //this will remove a card from player.hand array
+    //this will remove a card from player.hand array, push card into this.cardsInDiscardPile
   }
 
   slapCards() {
