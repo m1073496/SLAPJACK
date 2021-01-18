@@ -6,16 +6,23 @@ class Player {
   }
 
   playCard() {
-      return this.hand.splice(0, 1);
+      var card = this.hand.splice(0, 1);
+      return card.toString();
   }
 
   saveWinsToStorage() {
     //this will save this.wins value to local storage
   }
 
-  slapJack() {
-    //player takes all cards in discard pile, entire hand gets shuffled
-    //other player goes next
+  slapJack(game, player) {
+    for (var i = 0; i < game.cardsInDiscardPile.length; i++) {
+      var cardString = game.cardsInDiscardPile[i].toString();
+      player.hand.push(cardString);
+    }
+    game.shuffleDeck(player.hand);
+    player.hand = game.cardsInPlay;
+    game.cardsInPlay = [];
+    game.cardsInDiscardPile = [];
   }
 
   slapDouble() {

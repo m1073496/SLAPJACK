@@ -8,14 +8,13 @@ class Game {
     this.currentTurn;
   }
 
-  shuffleDeck() {
-    if (this.cardsInPlay.length === 0 && this.firstPlayer.hand.length === 0 && this.secondPlayer.hand.length === 0) {
-      for (var i = this.allCards.length -1; i >= 0; i--) {
+  shuffleDeck(cardDeck) {
+    if (this.cardsInPlay.length === 0) {
+      for (var i = cardDeck.length - 1; i >= 0; i--) {
         var randomIndex = Math.floor(Math.random() * (i + 1));
-        [this.allCards[i], this.allCards[randomIndex]] = [this.allCards[randomIndex], this.allCards[i]];
-        this.cardsInPlay.push(this.allCards[randomIndex]);
+        [cardDeck[i], cardDeck[randomIndex]] = [cardDeck[randomIndex], cardDeck[i]];
+        this.cardsInPlay.push(cardDeck[i]);
       }
-      return this.cardsInPlay;
     }
   }
 
@@ -55,15 +54,19 @@ class Game {
   }
 
   slapCards(e) {
-    //Need a conditional to disallow slapping if no cards in this.cardsInDiscardPile
-    if (e.key === 'f') {
-      console.log("hello");
-      //check the legality of the slap
-      //fire corresponding firstPlayer method
-    } else if (e.key === 'j') {
-      console.log("goodbye");
-      //check the legality of the slap
-      //fire corresponding secondPlayer method
+    if (e.key === 'f' && this.checkForJack()) {
+      this.firstPlayer.slapJack(this, this.firstPlayer);
+    } else if (e.key === 'j' && this.checkForJack()) {
+      this.secondPlayer.slapJack(this, this.secondPlayer);
+    }
+  }
+
+  checkForJack() {
+    var topCardIndex = this.cardsInDiscardPile.length - 1;
+    var string = this.cardsInDiscardPile[topCardIndex];
+    var splitString = string.split(' ');
+    if (splitString[1] === 'Jack') {
+      return true;
     }
   }
 
