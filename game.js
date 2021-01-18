@@ -54,19 +54,19 @@ class Game {
   }
 
   slapCards(e) {
-    if (e.key === 'f' && this.checkForJack()) {
-      this.firstPlayer.slapJack(this, this.firstPlayer);
-    } else if (e.key === 'j' && this.checkForJack()) {
-      this.secondPlayer.slapJack(this, this.secondPlayer);
+    if (e.key === 'f') {
+      this.checkForJack(this.firstPlayer);
+    } else if (e.key === 'j') {
+      this.checkForJack(this.secondPlayer);
     }
   }
 
-  checkForJack() {
+  checkForJack(player) {
     var topCardIndex = this.cardsInDiscardPile.length - 1;
     var string = this.cardsInDiscardPile[topCardIndex];
     var splitString = string.split(' ');
     if (splitString[1] === 'Jack') {
-      return true;
+      player.slapJack(this, player);
     }
   }
 
