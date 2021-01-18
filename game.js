@@ -2,33 +2,69 @@ class Game {
   constructor() {
     this.firstPlayer = new Player();
     this.secondPlayer = new Player();
-    this.allCards = [/*this should remain static throughout the course of the game*/];
+    this.allCards = allCards;
+    this.cardsInPlay = [];
     this.cardsInDiscardPile = [];
-    this.currentTurn = /*this will be overwritten frequently with either player1 or player2 instances at a given time */;
+    // this.currentTurn = /*this will be overwritten frequently with either player1 or player2 instances at a given time */;
   }
 
   shuffleDeck() {
-    //this will randomize the cards
+    if (this.cardsInPlay.length === 0 && this.firstPlayer.hand.length === 0 && this.secondPlayer.hand.length === 0) {
+      for (var i = this.allCards.length -1; i >= 0; i--) {
+        var randomIndex = Math.floor(Math.random() * (i + 1));
+        [this.allCards[i], this.allCards[randomIndex]] = [this.allCards[randomIndex], this.allCards[i]];
+        this.cardsInPlay.push(this.allCards[randomIndex]);
+      }
+      return this.cardsInPlay;
+    }
   }
 
-  dealCards(player1, player2) {
-    //this will push cards into each player's player.hand array
+  dealCards() {
+    if (this.cardsInPlay.length !== 0) {
+      var currentDeck = this.cardsInPlay;
+      for (var i = 0; i < currentDeck.length; i + 2) {
+        this.firstPlayer.hand.push(currentDeck[i]);
+        currentDeck.splice(i, 1);
+        this.secondPlayer.hand.push(currentDeck[i]);
+        currentDeck.splice(i, 1);
+      }
+    }
   }
 
   startNewGame() {
     //this will reset the deck and players (perhaps a new card deck shuffle as well)
+    this.allCards = allCards;
+    this.cardsInPlay = [];
+    this.cardsInDiscardPile = [];
+    this.firstPlayer = new Player();
+    this.secondPlayer = new Player();
   }
 
-  discard(player) {
-    //this will remove a card from player.hand array, push card into this.cardsInDiscardPile
+  addToDiscardPile(e) {
+    //Need a conditional to check if player has cards left in hand before allowing playCard method to fire
+    if (e.key === 'q' && this.firstPlayer.hand.length != 0) {
+      this.cardsInDiscardPile.push(this.firstPlayer.playCard());
+    } else if (e.key === 'p' && this.secondPlayer.hand.length != 0) {
+      this.cardsInDiscardPile.push(this.secondPlayer.playCard());
+    }
   }
 
-  slapCards() {
-    //conditionals for legal slaps (JACKS, doubles, sandwiches)
+  slapCards(e) {
+    //Need a conditional to disallow slapping if no cards in this.cardsInDiscardPile
+    if (e.key === 'f') {
+      console.log("hello");
+      //check the legality of the slap
+      //fire corresponding firstPlayer method
+    } else if (e.key === 'j') {
+      console.log("goodbye");
+      //check the legalist of the slap
+      //fire corresponding secondPlayer method
+    }
   }
 
   updateWinCount(player) {
     //this will update player.wins property
   }
 
-};
+
+}

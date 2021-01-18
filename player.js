@@ -1,16 +1,32 @@
 class Player {
   constructor() {
     this.id = Date.now();
-    this.wins = /*integer*/;
+    this.wins = 0;
     this.hand = [];
   }
 
   playCard() {
-    //this will remove a card from this.hand array
+      return this.hand.splice(0, 1);
   }
 
   saveWinsToStorage() {
     //this will save this.wins value to local storage
   }
 
-};
+  slapJack() {
+
+  }
+
+  slapDouble() {
+
+  }
+
+  slapSandwich() {
+
+  }
+
+  badSlap() {
+    
+  }
+
+}
