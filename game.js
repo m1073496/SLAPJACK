@@ -42,6 +42,12 @@ class Game {
 
   addToDiscardPile(e) {
     //Need a conditional to check if player has cards left in hand before allowing playCard method to fire
+    //Need a conditional to block players from discarding out of turn, unless that player's hand.length === 0
+    //use this.currentTurn
+    //this.currentTurn only alternates after player's discard, player's do not forfeit their turn due to a bad slap
+    //If one player is out of cards, the other player continues to discard. If they run out of cards before Jack appears
+    //they take the discard pile, shuffle, and continue to discard
+    //If one player is out of cards, the only valid slap is for Jacks
     if (e.key === 'q' && this.firstPlayer.hand.length != 0) {
       this.cardsInDiscardPile.push(this.firstPlayer.playCard());
     } else if (e.key === 'p' && this.secondPlayer.hand.length != 0) {
@@ -57,13 +63,15 @@ class Game {
       //fire corresponding firstPlayer method
     } else if (e.key === 'j') {
       console.log("goodbye");
-      //check the legalist of the slap
+      //check the legality of the slap
       //fire corresponding secondPlayer method
     }
   }
 
   updateWinCount(player) {
     //this will update player.wins property
+    //player wins when other player is out of cards and fails to slap the next Jack that arises
+    //OR player wins when other player is out of cards and slaps anything other than a Jack
   }
 
 
