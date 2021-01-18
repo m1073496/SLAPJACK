@@ -14,24 +14,14 @@ class Player {
     //this will save this.wins value to local storage
   }
 
-  slapJack(game, player) {
+  takePile(game, player) {
     for (var i = 0; i < game.cardsInDiscardPile.length; i++) {
-      var cardString = game.cardsInDiscardPile[i].toString();
-      player.hand.push(cardString);
+      player.hand.push(game.cardsInDiscardPile[i]);
     }
     game.shuffleDeck(player.hand);
     player.hand = game.cardsInPlay;
     game.cardsInPlay = [];
     game.cardsInDiscardPile = [];
-  }
-
-  slapDouble() {
-    //two cards in a row with the same number, or King/Queen/jack/Ace
-  }
-
-  slapSandwich() {
-    //card with integer x, card with integer y, card with integer x
-    //card with suit x, card with suit y, card with suit x
   }
 
   badSlap() {

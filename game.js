@@ -56,8 +56,10 @@ class Game {
   slapCards(e) {
     if (e.key === 'f') {
       this.checkForJack(this.firstPlayer);
+      this.checkForDoubles(this.firstPlayer);
     } else if (e.key === 'j') {
       this.checkForJack(this.secondPlayer);
+      this.checkForDoubles(this.secondPlayer);
     }
   }
 
@@ -66,7 +68,19 @@ class Game {
     var string = this.cardsInDiscardPile[topCardIndex];
     var splitString = string.split(' ');
     if (splitString[1] === 'Jack') {
-      player.slapJack(this, player);
+      player.takePile(this, player);
+    }
+  }
+
+  checkForDoubles(player) {
+    var topCardIndex = this.cardsInDiscardPile.length - 1;
+    var secondCardIndex = this.cardsInDiscardPile.length - 2;
+    var firstString = this.cardsInDiscardPile[topCardIndex];
+    var secondString = this.cardsInDiscardPile[secondCardIndex];
+    var splitFirst = firstString.split(' ');
+    var splitSecond = secondString.split(' ');
+    if (splitFirst[1] === splitSecond[1]) {
+      player.takePile(this, player);
     }
   }
 
