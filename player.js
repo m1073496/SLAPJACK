@@ -25,6 +25,7 @@ class Player {
   }
 
   badSlap() {
+    console.log("Bad slap");
     //slap that is not a Jack/double/sandwich
     //Player who slaps loses the card on top of their hand,
     //this card goes to the bottom of the other player's hand
