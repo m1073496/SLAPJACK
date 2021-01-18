@@ -11,6 +11,7 @@ window.onload = function() {
   newGame = new Game();
   newGame.shuffleDeck();
   newGame.dealCards();
+  newGame.currentTurn = newGame.firstPlayer;
 }
 
 

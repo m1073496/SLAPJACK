@@ -5,7 +5,7 @@ class Game {
     this.allCards = allCards;
     this.cardsInPlay = [];
     this.cardsInDiscardPile = [];
-    // this.currentTurn = /*this will be overwritten frequently with either player1 or player2 instances at a given time */;
+    this.currentTurn;
   }
 
   shuffleDeck() {
@@ -41,17 +41,16 @@ class Game {
   }
 
   addToDiscardPile(e) {
-    //Need a conditional to check if player has cards left in hand before allowing playCard method to fire
     //Need a conditional to block players from discarding out of turn, unless that player's hand.length === 0
-    //use this.currentTurn
-    //this.currentTurn only alternates after player's discard, player's do not forfeit their turn due to a bad slap
     //If one player is out of cards, the other player continues to discard. If they run out of cards before Jack appears
     //they take the discard pile, shuffle, and continue to discard
     //If one player is out of cards, the only valid slap is for Jacks
-    if (e.key === 'q' && this.firstPlayer.hand.length != 0) {
+    if (e.key === 'q' && this.firstPlayer.hand.length != 0 && this.currentTurn === this.firstPlayer) {
       this.cardsInDiscardPile.push(this.firstPlayer.playCard());
-    } else if (e.key === 'p' && this.secondPlayer.hand.length != 0) {
+      this.currentTurn = this.secondPlayer;
+    } else if (e.key === 'p' && this.secondPlayer.hand.length != 0 && this.currentTurn === this.secondPlayer) {
       this.cardsInDiscardPile.push(this.secondPlayer.playCard());
+      this.currentTurn = this.firstPlayer;
     }
   }
 
