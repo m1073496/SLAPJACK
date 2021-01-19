@@ -57,11 +57,13 @@ class Game {
     if (e.key === 'f' && this.cardsInDiscardPile.length !== 0 && this.checkValidity()) {
       this.firstPlayer.takePile(this, this.firstPlayer);
     } else if (e.key === 'f') {
-      this.firstPlayer.badSlap();
+      // this.firstPlayer.badSlap(this.firstPlayer);
+      this.secondPlayer.hand.unshift(this.firstPlayer.badSlap(this.firstPlayer));
     } else if (e.key === 'j' && this.cardsInDiscardPile.length !== 0 && this.checkValidity()) {
       this.secondPlayer.takePile(this, this.secondPlayer);
     } else if (e.key === 'j') {
-      this.secondPlayer.badSlap();
+      // this.secondPlayer.badSlap(this.secondPlayer);
+      this.firstPlayer.hand.unshift(this.secondPlayer.badSlap(this.secondPlayer));
     }
   }
 
