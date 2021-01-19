@@ -40,23 +40,26 @@ class Game {
     if (player === this.firstPlayer && player.hand.length !== 0 && this.currentTurn === player) {
       this.cardsInDiscardPile.push(this.firstPlayer.playCard());
       this.currentTurn = this.secondPlayer;
-      this.checkTurn();
+      this.checkTurn(player);
       renderDiscard();
       cloak(gameMsgBox);
     } else if (player === this.secondPlayer && player.hand.length !== 0 && this.currentTurn === player) {
       this.cardsInDiscardPile.push(this.secondPlayer.playCard());
       this.currentTurn = this.firstPlayer;
-      this.checkTurn();
+      this.checkTurn(player);
       renderDiscard();
       cloak(gameMsgBox);
     }
   }
 
-  checkTurn() {
-    if (this.firstPlayer.hand.length === 0) {
+  checkTurn(player) {
+    //set variable for player hand lengths
+    if (this.firstPlayer.hand.length === 0 && this.secondPlayer.hand.length === 0) {
+      this.currentTurn = player;
+    } else if (this.firstPlayer.hand.length === 0 && this.secondPlayer.hand.length !== 0) {
       this.currentTurn = this.secondPlayer;
       cloak(stackOne);
-    } else if (this.secondPlayer.hand.length === 0) {
+    } else if (this.secondPlayer.hand.length === 0 && this.firstPlayer.hand.length !== 0) {
       this.currentTurn = this.firstPlayer;
       cloak(stackTwo);
     }

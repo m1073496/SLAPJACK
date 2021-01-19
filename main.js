@@ -4,8 +4,9 @@ var gameMsg = document.querySelector('.msg');
 var gameMsgBox = document.querySelector('.game-msg');
 var stackOne = document.querySelector('.stack-one');
 var stackTwo = document.querySelector('.stack-two');
-var winPlayerOne = document.querySelector('.player-one');
-var winPlayerTwo = document.querySelector('.player-two');
+var winsPlayerOne = document.querySelector('.player-one');
+var winsPlayerTwo = document.querySelector('.player-two');
+var newGameButton = document.querySelector('.new-game-button');
 var newGame;
 
 //Event Listeners
@@ -22,6 +23,14 @@ function startNewGame() {
   newGame.dealCards();
   newGame.currentTurn = newGame.firstPlayer;
 };
+
+function cloak(element) {
+  element.classList.add('hidden');
+}
+
+function reveal(element) {
+  element.classList.remove('hidden');
+}
 
 function checkPlayerMove(e) {
   if (e.key === 'q') {
@@ -71,22 +80,16 @@ function findPlayerNum(player) {
   };
 }
 
-function cloak(element) {
-  element.classList.add('hidden');
-}
-
-function reveal(element) {
-  element.classList.remove('hidden');
-}
-
 function renderWin(player) {
   if (player === newGame.firstPlayer) {
-    winPlayerOne.innerText = player.wins;
+    winsPlayerOne.innerText = player.wins;
+    gameMsg.innerText = `PLAYER 1 WINS!`;
     reveal(gameMsgBox);
-    gameMsg.innerText = `PLATYER 1 WINS!`;
+    reveal(newGameButton);
   } else if (player === newGame.secondPlayer) {
-    winPlayerTwo.innerText = player.wins;
-    reveal(gameMsgBox);
+    winsPlayerTwo.innerText = player.wins;
     gameMsg.innerText = `PLAYER 2 WINS!`;
+    reveal(gameMsgBox);
+    reveal(newGameButton);
   }
 }
