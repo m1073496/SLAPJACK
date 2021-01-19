@@ -39,14 +39,16 @@ class Game {
     //they take the discard pile, shuffle, and continue to discard
     if (player === this.firstPlayer && player.hand.length !== 0 && this.currentTurn === player) {
       this.cardsInDiscardPile.push(this.firstPlayer.playCard());
-      console.log(this.cardsInDiscardPile);
       this.currentTurn = this.secondPlayer;
       this.checkTurn();
+      renderDiscard();
+      removeMsg();
     } else if (player === this.secondPlayer && player.hand.length !== 0 && this.currentTurn === player) {
       this.cardsInDiscardPile.push(this.secondPlayer.playCard());
-      console.log(this.cardsInDiscardPile);
       this.currentTurn = this.firstPlayer;
       this.checkTurn();
+      renderDiscard();
+      removeMsg();
     }
   }
 
@@ -61,33 +63,39 @@ class Game {
 
   slapCards(player) {
     if (player === this.firstPlayer && this.cardsInDiscardPile.length !== 0 && this.secondPlayer.hand.length !== 0 && this.checkValidity()) {
+      renderMsg(this.firstPlayer);
       this.firstPlayer.takePile(this, this.firstPlayer);
-      console.log("GOOD SLAP");
+      removeDiscardPile();
     } else if (player === this.firstPlayer && this.cardsInDiscardPile.length !== 0 && this.secondPlayer.hand.length === 0 && this.checkForJack()) {
       this.firstPlayer.wins++;
+      removeDiscardPile();
       //save win to saveWinsToStorage
       //startNewGame
     } else if (player === this.firstPlayer && player.hand.length === 0) {
       this.secondPlayer.wins++
+      removeDiscardPile();
       //save win to saveWinsToStorage
       //startNewGame
     } else if (player === this.firstPlayer) {
-      console.log("BAD SLAP");
+      renderMsg(this.firstPlayer);
       this.secondPlayer.hand.push(this.firstPlayer.badSlap(this.firstPlayer));
     } else if (player === this.secondPlayer && this.cardsInDiscardPile.length !== 0 && this.firstPlayer.hand.length !== 0 && this.checkValidity()) {
+      renderMsg(this.secondPlayer);
       this.secondPlayer.takePile(this, this.secondPlayer);
-      console.log("GOOD SLAP");
+      removeDiscardPile();
     } else if (player === this.secondPlayer && this.cardsInDiscardPile.length !== 0 && this.firstPlayer.hand.length === 0 && this.checkForJack()) {
       this.secondPlayer.wins++;
+      removeDiscardPile();
       //save win to saveWinsToStorage
       //startNewGame
     } else if (player === this.secondPlayer && player.hand.length === 0) {
       this.firstPlayer.wins++;
+      removeDiscardPile();
       //save win to saveWinsToStorage
       //startNewGame
     } else if (player === this.secondPlayer) {
+      renderMsg(this.secondPlayer);
       this.firstPlayer.hand.push(this.secondPlayer.badSlap(this.secondPlayer));
-      console.log("BAD SLAP");
     }
   }
 
@@ -103,23 +111,23 @@ class Game {
 
   checkForJack() {
     var topCard = this.cardsInDiscardPile[this.cardsInDiscardPile.length - 1];
-    var splitString = topCard.split(' ');
-    return (splitString[1] === 'Jack');
+    var splitString = topCard.split('-');
+    return (splitString[1] === 'jack');
   }
 
   checkForDoubles() {
     var topCard = this.cardsInDiscardPile[this.cardsInDiscardPile.length - 1];
     var secondCard = this.cardsInDiscardPile[this.cardsInDiscardPile.length - 2];
-    var splitFirst = topCard.split(' ');
-    var splitSecond = secondCard.split(' ');
+    var splitFirst = topCard.split('-');
+    var splitSecond = secondCard.split('-');
     return (splitFirst[1] === splitSecond[1]);
   }
 
   checkForSandwich() {
     var topCard = this.cardsInDiscardPile[this.cardsInDiscardPile.length - 1];
     var thirdCard = this.cardsInDiscardPile[this.cardsInDiscardPile.length - 3];
-    var splitFirst = topCard.split(' ');
-    var splitThird = thirdCard.split(' ');
+    var splitFirst = topCard.split('-');
+    var splitThird = thirdCard.split('-');
     return (splitFirst[1] === splitThird[1]);
   }
 

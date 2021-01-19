@@ -1,4 +1,7 @@
 //Variables
+var discardPile = document.querySelector('.discard-pile');
+var gameMsg = document.querySelector('.msg');
+var gameMsgBox = document.querySelector('.game-msg');
 var newGame;
 
 //Event Listeners
@@ -27,3 +30,53 @@ function checkPlayerMove(e) {
     newGame.slapCards(newGame.secondPlayer);
   }
 };
+
+
+function renderDiscard() {
+  discardPile.classList.remove('hidden');
+  var topCardIndex = newGame.cardsInDiscardPile.length - 1;
+  var cardImage = newGame.cardsInDiscardPile[topCardIndex];
+  discardPile.innerHTML = `<img class="discard-pile" src="./assets/${cardImage}.png">`;
+}
+
+function removeDiscardPile() {
+  discardPile.classList.add('hidden');
+  //Message for good slap
+}
+
+function renderMsg(player) {
+  gameMsgBox.classList.remove('hidden');
+  var playerNum = findPlayerNum(player).playerNum;
+  var otherPlayerNum = findPlayerNum(player).otherPlayerNum;
+  if (newGame.cardsInDiscardPile.length >= 3 && newGame.checkForSandwich()) {
+    gameMsg.innerText = `SANDWICH! PLAYER ${playerNum} TAKES THE PILE!`;
+  } else if (newGame.cardsInDiscardPile.length === 2 && newGame.checkForDoubles()) {
+    gameMsg.innerText = `DOUBLE! PLAYER ${playerNum} TAKES THE PILE!`;
+  } else if (newGame.checkForJack()) {
+    gameMsg.innerText = `SLAPJACK! PLAYER ${playerNum} TAKES THE PILE!`;
+  } else {
+    gameMsg.innerText = `BAD SLAP! PLAYER ${playerNum} FORFEITS A CARD TO PLAYER ${otherPlayerNum}!`;
+  }
+}
+
+function findPlayerNum(player) {
+  if (newGame.firstPlayer === player) {
+    playerNum = 1;
+    otherPlayerNum = 2;
+  } else if (newGame.secondPlayer === player) {
+    playerNum = 2;
+    otherPlayerNum = 1;
+  }
+  return {
+    playerNum, otherPlayerNum
+  };
+}
+
+function removeMsg() {
+  gameMsgBox.classList.add('hidden');
+}
+
+// function renderWinnerMsg() {
+//   var playerNum = 1;
+//   gameMsg.innerText = `${playerNum} WINS!`;
+// }
