@@ -61,6 +61,7 @@ class Game {
 
   slapCards(player) {
     if (player === this.firstPlayer && this.cardsInDiscardPile.length !== 0 && this.secondPlayer.hand.length !== 0 && this.checkValidity()) {
+      renderMsg();
       this.firstPlayer.takePile(this, this.firstPlayer);
       removeDiscardPile();
     } else if (player === this.firstPlayer && this.cardsInDiscardPile.length !== 0 && this.secondPlayer.hand.length === 0 && this.checkForJack()) {
@@ -77,6 +78,7 @@ class Game {
       console.log("BAD SLAP");
       this.secondPlayer.hand.push(this.firstPlayer.badSlap(this.firstPlayer));
     } else if (player === this.secondPlayer && this.cardsInDiscardPile.length !== 0 && this.firstPlayer.hand.length !== 0 && this.checkValidity()) {
+      renderMsg();
       this.secondPlayer.takePile(this, this.secondPlayer);
       removeDiscardPile();
     } else if (player === this.secondPlayer && this.cardsInDiscardPile.length !== 0 && this.firstPlayer.hand.length === 0 && this.checkForJack()) {
