@@ -35,19 +35,14 @@ function checkPlayerMove(e) {
 
 
 function renderDiscard() {
-  discardPile.classList.remove('hidden');
+  reveal(discardPile);
   var topCardIndex = newGame.cardsInDiscardPile.length - 1;
   var cardImage = newGame.cardsInDiscardPile[topCardIndex];
   discardPile.innerHTML = `<img class="discard-pile" src="./assets/${cardImage}.png">`;
 }
 
-function removeDiscardPile() {
-  discardPile.classList.add('hidden');
-  //Message for good slap
-}
-
 function renderMsg(player) {
-  showMsg()
+  reveal(gameMsgBox);
   var playerNum = findPlayerNum(player).playerNum;
   var otherPlayerNum = findPlayerNum(player).otherPlayerNum;
   if (newGame.cardsInDiscardPile.length >= 3 && newGame.checkForSandwich()) {
@@ -74,22 +69,22 @@ function findPlayerNum(player) {
   };
 }
 
-function removeMsg() {
-  gameMsgBox.classList.add('hidden');
+function cloak(element) {
+  element.classList.add('hidden');
 }
 
-function showMsg() {
-  gameMsgBox.classList.remove('hidden');
+function reveal(element) {
+  element.classList.remove('hidden');
 }
 
 function renderWin(player) {
   if (player === newGame.firstPlayer) {
     winPlayerOne.innerText = player.wins;
-    showMsg();
+    reveal(gameMsgBox);
     gameMsg.innerText = `PLATYER 1 WINS!`;
   } else if (player === newGame.secondPlayer) {
     winPlayerTwo.innerText = player.wins;
-    showMsg();
+    reveal(gameMsgBox);
     gameMsg.innerText = `PLAYER 2 WINS!`;
   }
 }
