@@ -53,15 +53,16 @@ class Game {
   }
 
   checkTurn(player) {
-    //set variable for player hand lengths
-    if (this.firstPlayer.hand.length === 0 && this.secondPlayer.hand.length === 0) {
+    var firstHand = this.firstPlayer.hand.length;
+    var secondHand = this.secondPlayer.hand.length;
+    if (firstHand === 0 && secondHand === 0) {
       this.currentTurn = player;
       cloak(stackOne);
       cloak(stackTwo);
-    } else if (this.firstPlayer.hand.length === 0 && this.secondPlayer.hand.length !== 0) {
+    } else if (firstHand === 0 && secondHand !== 0) {
       this.currentTurn = this.secondPlayer;
       cloak(stackOne);
-    } else if (this.secondPlayer.hand.length === 0 && this.firstPlayer.hand.length !== 0) {
+    } else if (secondHand === 0 && firstHand !== 0) {
       this.currentTurn = this.firstPlayer;
       cloak(stackTwo);
     }

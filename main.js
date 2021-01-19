@@ -54,11 +54,12 @@ function renderDiscard() {
 
 function renderMsg(player) {
   reveal(gameMsgBox);
+  var checkBothHands = (newGame.firstPlayer.hand.length !== 0 && newGame.secondPlayer.hand.length !== 0);
   var playerNum = findPlayerNum(player).playerNum;
   var otherPlayerNum = findPlayerNum(player).otherPlayerNum;
-  if (newGame.cardsInDiscardPile.length >= 3 && newGame.checkForSandwich()) {
+  if (newGame.cardsInDiscardPile.length >= 3 && checkBothHands && newGame.checkForSandwich()) {
     gameMsg.innerText = `SANDWICH! PLAYER ${playerNum} TAKES THE PILE!`;
-  } else if (newGame.cardsInDiscardPile.length >= 2 && newGame.checkForDoubles()) {
+  } else if (newGame.cardsInDiscardPile.length >= 2 && checkBothHands && newGame.checkForDoubles()) {
     gameMsg.innerText = `DOUBLE! PLAYER ${playerNum} TAKES THE PILE!`;
   } else if (newGame.checkForJack()) {
     gameMsg.innerText = `SLAPJACK! PLAYER ${playerNum} TAKES THE PILE!`;
