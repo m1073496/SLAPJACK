@@ -42,11 +42,13 @@ class Game {
       console.log(this.cardsInDiscardPile);
       this.currentTurn = this.secondPlayer;
       this.checkTurn();
+      renderDiscard();
     } else if (player === this.secondPlayer && player.hand.length !== 0 && this.currentTurn === player) {
       this.cardsInDiscardPile.push(this.secondPlayer.playCard());
       console.log(this.cardsInDiscardPile);
       this.currentTurn = this.firstPlayer;
       this.checkTurn();
+      renderDiscard();
     }
   }
 
@@ -62,7 +64,7 @@ class Game {
   slapCards(player) {
     if (player === this.firstPlayer && this.cardsInDiscardPile.length !== 0 && this.secondPlayer.hand.length !== 0 && this.checkValidity()) {
       this.firstPlayer.takePile(this, this.firstPlayer);
-      console.log("GOOD SLAP");
+      removeDiscardPile();
     } else if (player === this.firstPlayer && this.cardsInDiscardPile.length !== 0 && this.secondPlayer.hand.length === 0 && this.checkForJack()) {
       this.firstPlayer.wins++;
       //save win to saveWinsToStorage
@@ -76,7 +78,7 @@ class Game {
       this.secondPlayer.hand.push(this.firstPlayer.badSlap(this.firstPlayer));
     } else if (player === this.secondPlayer && this.cardsInDiscardPile.length !== 0 && this.firstPlayer.hand.length !== 0 && this.checkValidity()) {
       this.secondPlayer.takePile(this, this.secondPlayer);
-      console.log("GOOD SLAP");
+      removeDiscardPile();
     } else if (player === this.secondPlayer && this.cardsInDiscardPile.length !== 0 && this.firstPlayer.hand.length === 0 && this.checkForJack()) {
       this.secondPlayer.wins++;
       //save win to saveWinsToStorage

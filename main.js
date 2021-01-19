@@ -30,9 +30,14 @@ function checkPlayerMove(e) {
 };
 
 
-function renderDiscard(cardString) {
+function renderDiscard() {
   discardPile.classList.remove('hidden');
   var topCardIndex = newGame.cardsInDiscardPile.length - 1;
   var cardImage = newGame.cardsInDiscardPile[topCardIndex];
   discardPile.innerHTML = `<img class="discard-pile" src="./assets/${cardImage}.png">`;
+}
+
+function removeDiscardPile() {
+  discardPile.classList.add('hidden');
+  //Message for good slap
 }
