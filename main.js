@@ -1,6 +1,7 @@
 //Variables
 var discardPile = document.querySelector('.discard-pile');
 var gameMsg = document.querySelector('.msg');
+var gameMsgBox = document.querySelector('.game-msg');
 var newGame;
 
 //Event Listeners
@@ -43,8 +44,9 @@ function removeDiscardPile() {
   //Message for good slap
 }
 
-function renderMsg() {
-  var playerNum = 1;
+function renderMsg(player) {
+  gameMsgBox.classList.remove('hidden');
+  var playerNum = findPlayerNum(player);
   if (newGame.checkForJack()) {
     gameMsg.innerText = `SLAPJACK! PLAYER ${playerNum} TAKES THE PILE!`;
   } else if (newGame.checkForDoubles()) {
@@ -56,24 +58,21 @@ function renderMsg() {
   }
 }
 
-// function renderSlapJackMsg() {
-//   var playerNum = 1;
-//   gameMsg.innerText = `SLAPJACK! PLAYER ${playerNum} TAKES THE PILE!`;
-// }
-//
-// function renderDoubleMsg() {
-//   var playerNum = 1;
-//   gameMsg.innerText = `DOUBLE! PLAYER ${playerNum} TAKES THE PILE!`;
-// }
-//
-// function renderSandwichMsg() {
-//   var playerNum = 1;
-//   gameMsg.innerText = `SANDWICH! PLAYER ${playerNum} TAKES THE PILE!`;
-// }
+function findPlayerNum(player) {
+  if (newGame.firstPlayer === player) {
+    return 1;
+  } else if (newGame.secondPlayer === player) {
+    return 2;
+  }
+}
 
 function renderBadSlapMsg() {
   var playerNum = 1;
-  gameMsg.innerText = `BAD SLAP! PLAYER ${playerNum} FORFEITS A CARD TO PLAYER ${playerNum}!`;
+  gameMsgBox.innerText = `BAD SLAP! PLAYER ${playerNum} FORFEITS A CARD TO PLAYER ${playerNum}!`;
+}
+
+function removeMsg() {
+  gameMsgBox.classList.add('hidden');
 }
 
 // function renderWinnerMsg() {
