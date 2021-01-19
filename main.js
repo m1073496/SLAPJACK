@@ -16,9 +16,13 @@ window.onload = function() {
 
 
 function checkPlayerMove(e) {
-  if (e.key === 'q' || e.key === 'p') {
-    newGame.addToDiscardPile(e);
-  } else if (e.key === 'f' || e.key === 'j') {
-    newGame.slapCards(e);
+  if (e.key === 'q') {
+    newGame.addToDiscardPile(newGame.firstPlayer);
+  } else if (e.key === 'p') {
+    newGame.addToDiscardPile(newGame.secondPlayer);
+  } else if (e.key === 'f') {
+    newGame.slapCards(newGame.firstPlayer);
+  } else if (e.key === 'j') {
+    newGame.slapCards(newGame.secondPlayer);
   }
 };

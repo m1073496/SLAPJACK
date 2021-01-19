@@ -39,17 +39,17 @@ class Game {
     this.secondPlayer = new Player();
   }
 
-  addToDiscardPile(e) {
+  addToDiscardPile(player) {
     //Need a conditional to block players from discarding out of turn, unless that player's hand.length === 0
     //If one player is out of cards, the other player continues to discard. If they run out of cards before Jack appears
     //they take the discard pile, shuffle, and continue to discard
     //If one player is out of cards, the only valid slap is for Jacks
-    if (e.key === 'q' && this.firstPlayer.hand.length !== 0 && this.currentTurn === this.firstPlayer) {
+    if (player === this.firstPlayer && player.hand.length !== 0 && this.currentTurn === this.firstPlayer) {
       this.cardsInDiscardPile.push(this.firstPlayer.playCard());
       console.log(this.cardsInDiscardPile);
       this.currentTurn = this.secondPlayer;
       this.checkTurn();
-    } else if (e.key === 'p' && this.secondPlayer.hand.length !== 0 && this.currentTurn === this.secondPlayer) {
+    } else if (player === this.secondPlayer && player.hand.length !== 0 && this.currentTurn === this.secondPlayer) {
       this.cardsInDiscardPile.push(this.secondPlayer.playCard());
       console.log(this.cardsInDiscardPile);
       this.currentTurn = this.firstPlayer;
@@ -65,21 +65,25 @@ class Game {
     }
   }
 
-  slapCards(e) {
-    if (e.key === 'f' && this.cardsInDiscardPile.length !== 0 && this.secondPlayer.hand.length !== 0 && this.checkValidity()) {
+  slapCards(player) {
+    if (player === this.firstPlayer && this.cardsInDiscardPile.length !== 0 && this.secondPlayer.hand.length !== 0 && this.checkValidity()) {
       this.firstPlayer.takePile(this, this.firstPlayer);
       console.log("GOOD SLAP");
-    } else if (e.key === 'f' && this.cardsInDiscardPile.length !== 0 && this.secondPlayer.hand.length === 0 && this.checkForJack()) {
+    } else if (player === this.firstPlayer && this.cardsInDiscardPile.length !== 0 && this.secondPlayer.hand.length === 0 && this.checkForJack()) {
       this.firstPlayer.wins++;
-    } else if (e.key === 'f') {
+    } else if (player === this.firstPlayer && player.hand.length === 0) {
+      this.secondPlayer.wins++
+    } else if (player === this.firstPlayer) {
       console.log("BAD SLAP");
       this.secondPlayer.hand.push(this.firstPlayer.badSlap(this.firstPlayer));
-    } else if (e.key === 'j' && this.cardsInDiscardPile.length !== 0 && this.firstPlayer.hand.length !== 0 && this.checkValidity()) {
+    } else if (player === this.secondPlayer && this.cardsInDiscardPile.length !== 0 && this.firstPlayer.hand.length !== 0 && this.checkValidity()) {
       this.secondPlayer.takePile(this, this.secondPlayer);
       console.log("GOOD SLAP");
-    } else if (e.key === 'j' && this.cardsInDiscardPile.length !== 0 && this.firstPlayer.hand.length === 0 && this.checkForJack()) {
+    } else if (player === this.secondPlayer && this.cardsInDiscardPile.length !== 0 && this.firstPlayer.hand.length === 0 && this.checkForJack()) {
       this.secondPlayer.wins++;
-    } else if (e.key === 'j') {
+    } else if (player === this.secondPlayer && player.hand.length === 0) {
+      this.firstPlayer.wins++;
+    } else if (player === this.secondPlayer) {
       this.firstPlayer.hand.push(this.secondPlayer.badSlap(this.secondPlayer));
       console.log("BAD SLAP");
     }
