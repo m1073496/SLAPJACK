@@ -44,11 +44,21 @@ class Game {
     //If one player is out of cards, the other player continues to discard. If they run out of cards before Jack appears
     //they take the discard pile, shuffle, and continue to discard
     //If one player is out of cards, the only valid slap is for Jacks
-    if (e.key === 'q' && this.firstPlayer.hand.length != 0 && this.currentTurn === this.firstPlayer) {
+    if (e.key === 'q' && this.firstPlayer.hand.length !== 0 && this.currentTurn === this.firstPlayer) {
       this.cardsInDiscardPile.push(this.firstPlayer.playCard());
       this.currentTurn = this.secondPlayer;
-    } else if (e.key === 'p' && this.secondPlayer.hand.length != 0 && this.currentTurn === this.secondPlayer) {
+      this.checkTurn();
+    } else if (e.key === 'p' && this.secondPlayer.hand.length !== 0 && this.currentTurn === this.secondPlayer) {
       this.cardsInDiscardPile.push(this.secondPlayer.playCard());
+      this.currentTurn = this.firstPlayer;
+      this.checkTurn();
+    }
+  }
+
+  checkTurn() {
+    if (this.firstPlayer.hand.length === 0) {
+      this.currentTurn = this.secondPlayer;
+    } else if (this.secondPlayer.hand.length === 0) {
       this.currentTurn = this.firstPlayer;
     }
   }
