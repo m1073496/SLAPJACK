@@ -2,6 +2,8 @@
 var discardPile = document.querySelector('.discard-pile');
 var gameMsg = document.querySelector('.msg');
 var gameMsgBox = document.querySelector('.game-msg');
+var winPlayerOne = document.querySelector('.player-one');
+var winPlayerTwo = document.querySelector('.player-two');
 var newGame;
 
 //Event Listeners
@@ -80,3 +82,11 @@ function removeMsg() {
 //   var playerNum = 1;
 //   gameMsg.innerText = `${playerNum} WINS!`;
 // }
+
+function updateWinCount(player) {
+  if (player === newGame.firstPlayer) {
+    winPlayerOne.innerText = player.wins;
+  } else if (player === newGame.secondPlayer) {
+    winPlayerTwo.innerText = player.wins;
+  }
+}

@@ -69,11 +69,13 @@ class Game {
     } else if (player === this.firstPlayer && this.cardsInDiscardPile.length !== 0 && this.secondPlayer.hand.length === 0 && this.checkForJack()) {
       this.firstPlayer.wins++;
       removeDiscardPile();
+      updateWinCount(player);
       //save win to saveWinsToStorage
       //startNewGame
     } else if (player === this.firstPlayer && player.hand.length === 0) {
       this.secondPlayer.wins++
       removeDiscardPile();
+      updateWinCount(this.secondPlayer);
       //save win to saveWinsToStorage
       //startNewGame
     } else if (player === this.firstPlayer) {
@@ -86,11 +88,13 @@ class Game {
     } else if (player === this.secondPlayer && this.cardsInDiscardPile.length !== 0 && this.firstPlayer.hand.length === 0 && this.checkForJack()) {
       this.secondPlayer.wins++;
       removeDiscardPile();
+      updateWinCount(player);
       //save win to saveWinsToStorage
       //startNewGame
     } else if (player === this.secondPlayer && player.hand.length === 0) {
       this.firstPlayer.wins++;
       removeDiscardPile();
+      updateWinCount(this.firstPlayer);
       //save win to saveWinsToStorage
       //startNewGame
     } else if (player === this.secondPlayer) {
