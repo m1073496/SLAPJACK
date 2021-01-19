@@ -5,17 +5,16 @@ class Game {
     this.allCards = allCards;
     this.cardsInPlay = [];
     this.cardsInDiscardPile = [];
-    // this.currentTurn = /*this will be overwritten frequently with either player1 or player2 instances at a given time */;
+    this.currentTurn;
   }
 
-  shuffleDeck() {
-    if (this.cardsInPlay.length === 0 && this.firstPlayer.hand.length === 0 && this.secondPlayer.hand.length === 0) {
-      for (var i = this.allCards.length -1; i >= 0; i--) {
+  shuffleDeck(cardDeck) {
+    if (this.cardsInPlay.length === 0) {
+      for (var i = cardDeck.length - 1; i >= 0; i--) {
         var randomIndex = Math.floor(Math.random() * (i + 1));
-        [this.allCards[i], this.allCards[randomIndex]] = [this.allCards[randomIndex], this.allCards[i]];
-        this.cardsInPlay.push(this.allCards[randomIndex]);
+        [cardDeck[i], cardDeck[randomIndex]] = [cardDeck[randomIndex], cardDeck[i]];
+        this.cardsInPlay.push(cardDeck[i]);
       }
-      return this.cardsInPlay;
     }
   }
 
@@ -41,29 +40,74 @@ class Game {
   }
 
   addToDiscardPile(e) {
-    //Need a conditional to check if player has cards left in hand before allowing playCard method to fire
-    if (e.key === 'q' && this.firstPlayer.hand.length != 0) {
+    //Need a conditional to block players from discarding out of turn, unless that player's hand.length === 0
+    //If one player is out of cards, the other player continues to discard. If they run out of cards before Jack appears
+    //they take the discard pile, shuffle, and continue to discard
+    //If one player is out of cards, the only valid slap is for Jacks
+    if (e.key === 'q' && this.firstPlayer.hand.length != 0 && this.currentTurn === this.firstPlayer) {
       this.cardsInDiscardPile.push(this.firstPlayer.playCard());
-    } else if (e.key === 'p' && this.secondPlayer.hand.length != 0) {
+      this.currentTurn = this.secondPlayer;
+    } else if (e.key === 'p' && this.secondPlayer.hand.length != 0 && this.currentTurn === this.secondPlayer) {
       this.cardsInDiscardPile.push(this.secondPlayer.playCard());
+      this.currentTurn = this.firstPlayer;
     }
   }
 
   slapCards(e) {
-    //Need a conditional to disallow slapping if no cards in this.cardsInDiscardPile
-    if (e.key === 'f') {
-      console.log("hello");
-      //check the legality of the slap
-      //fire corresponding firstPlayer method
+    if (e.key === 'f' && this.cardsInDiscardPile.length != 0 && (this.checkForJack() || this.checkForDoubles() || this.checkForSandwich())) {
+      this.firstPlayer.takePile(this, this.firstPlayer);
+    } else if (e.key === 'f') {
+      this.firstPlayer.badSlap();
+    } else if (e.key === 'j' && this.cardsInDiscardPile.length != 0 && (this.checkForJack() || this.checkForDoubles() || this.checkForSandwich())) {
+      this.secondPlayer.takePile(this, this.secondPlayer);
     } else if (e.key === 'j') {
-      console.log("goodbye");
-      //check the legalist of the slap
-      //fire corresponding secondPlayer method
+      this.secondPlayer.badSlap();
+    }
+  }
+
+  checkForJack() {
+    // var topCardIndex = this.cardsInDiscardPile.length - 1;
+    // var string = this.cardsInDiscardPile[topCardIndex];
+    var splitString = this.cardsInDiscardPile[this.cardsInDiscardPile.length - 1].split(' ');
+    if (splitString[1] === 'Jack') {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  checkForDoubles() {
+    // var topCardIndex = this.cardsInDiscardPile.length - 1;
+    // var secondCardIndex = this.cardsInDiscardPile.length - 2;
+    // var firstString = this.cardsInDiscardPile[topCardIndex];
+    // var secondString = this.cardsInDiscardPile[secondCardIndex];
+    var splitFirst = this.cardsInDiscardPile[this.cardsInDiscardPile.length - 1].split(' ');
+    var splitSecond = this.cardsInDiscardPile[this.cardsInDiscardPile.length - 2].split(' ');
+    if (splitFirst[1] === splitSecond[1]) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  checkForSandwich() {
+    // var topCardIndex = this.cardsInDiscardPile.length - 1;
+    // var thirdCardIndex = this.cardsInDiscardPile.length - 3;
+    // var firstString = this.cardsInDiscardPile[topCardIndex];
+    // var thirdString = this.cardsInDiscardPile[thirdCardIndex];
+    var splitFirst = this.cardsInDiscardPile[this.cardsInDiscardPile.length - 1].split(' ');
+    var splitThird = this.cardsInDiscardPile[this.cardsInDiscardPile.length - 3].split(' ');
+    if (splitFirst[1] === splitThird[1]) {
+      return true;
+    } else {
+      return false;
     }
   }
 
   updateWinCount(player) {
     //this will update player.wins property
+    //player wins when other player is out of cards and fails to slap the next Jack that arises
+    //OR player wins when other player is out of cards and slaps anything other than a Jack
   }
 
 

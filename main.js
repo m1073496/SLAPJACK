@@ -9,8 +9,9 @@ document.addEventListener('keydown', checkPlayerMove);
 //Functions
 window.onload = function() {
   newGame = new Game();
-  newGame.shuffleDeck();
+  newGame.shuffleDeck(newGame.allCards);
   newGame.dealCards();
+  newGame.currentTurn = newGame.firstPlayer;
 }
 
 

@@ -6,27 +6,29 @@ class Player {
   }
 
   playCard() {
-      return this.hand.splice(0, 1);
+      var card = this.hand.splice(0, 1);
+      return card.toString();
   }
 
   saveWinsToStorage() {
     //this will save this.wins value to local storage
   }
 
-  slapJack() {
-
-  }
-
-  slapDouble() {
-
-  }
-
-  slapSandwich() {
-
+  takePile(game, player) {
+    for (var i = 0; i < game.cardsInDiscardPile.length; i++) {
+      player.hand.push(game.cardsInDiscardPile[i]);
+    }
+    game.shuffleDeck(player.hand);
+    player.hand = game.cardsInPlay;
+    game.cardsInPlay = [];
+    game.cardsInDiscardPile = [];
   }
 
   badSlap() {
-    
+    console.log("Bad slap");
+    //slap that is not a Jack/double/sandwich
+    //Player who slaps loses the card on top of their hand,
+    //this card goes to the bottom of the other player's hand
   }
 
 }
