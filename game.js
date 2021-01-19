@@ -56,6 +56,8 @@ class Game {
     //set variable for player hand lengths
     if (this.firstPlayer.hand.length === 0 && this.secondPlayer.hand.length === 0) {
       this.currentTurn = player;
+      cloak(stackOne);
+      cloak(stackTwo);
     } else if (this.firstPlayer.hand.length === 0 && this.secondPlayer.hand.length !== 0) {
       this.currentTurn = this.secondPlayer;
       cloak(stackOne);
@@ -84,6 +86,7 @@ class Game {
       //startNewGame
     } else if (player === this.firstPlayer) {
       renderMsg(this.firstPlayer);
+      reveal(stackTwo);
       this.secondPlayer.hand.push(this.firstPlayer.badSlap(this.firstPlayer));
     } else if (player === this.secondPlayer && this.cardsInDiscardPile.length !== 0 && this.firstPlayer.hand.length !== 0 && this.checkValidity()) {
       renderMsg(this.secondPlayer);
@@ -102,6 +105,7 @@ class Game {
       //startNewGame
     } else if (player === this.secondPlayer) {
       renderMsg(this.secondPlayer);
+      reveal(stackOne);
       this.firstPlayer.hand.push(this.secondPlayer.badSlap(this.secondPlayer));
     }
   }
