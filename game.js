@@ -56,17 +56,27 @@ class Game {
   slapCards(e) {
     if (e.key === 'f' && this.cardsInDiscardPile.length !== 0 && this.checkValidity()) {
       this.firstPlayer.takePile(this, this.firstPlayer);
+      console.log("GOOD SLAP");
     } else if (e.key === 'f') {
+      console.log("BAD SLAP");
       this.secondPlayer.hand.push(this.firstPlayer.badSlap(this.firstPlayer));
     } else if (e.key === 'j' && this.cardsInDiscardPile.length !== 0 && this.checkValidity()) {
       this.secondPlayer.takePile(this, this.secondPlayer);
+      console.log("GOOD SLAP");
     } else if (e.key === 'j') {
       this.firstPlayer.hand.push(this.secondPlayer.badSlap(this.secondPlayer));
+      console.log("BAD SLAP");
     }
   }
 
   checkValidity() {
-    return (this.checkForJack() || this.checkForDoubles() || this.checkForSandwich());
+    if (this.cardsInDiscardPile.length >= 3) {
+      return (this.checkForJack() || this.checkForDoubles() || this.checkForSandwich());
+    } else if (this.cardsInDiscardPile.length === 2) {
+      return (this.checkForJack() || this.checkForDoubles());
+    } else {
+      return (this.checkForJack());
+    }
   }
 
   checkForJack() {
