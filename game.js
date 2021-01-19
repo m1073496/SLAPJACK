@@ -30,78 +30,97 @@ class Game {
     }
   }
 
-  startNewGame() {
-    //this will reset the deck and players (perhaps a new card deck shuffle as well)
-    this.allCards = allCards;
-    this.cardsInPlay = [];
-    this.cardsInDiscardPile = [];
-    this.firstPlayer = new Player();
-    this.secondPlayer = new Player();
+  resetGame() {
+    startNewGame();
   }
 
-  addToDiscardPile(e) {
-    //Need a conditional to block players from discarding out of turn, unless that player's hand.length === 0
+  addToDiscardPile(player) {
     //If one player is out of cards, the other player continues to discard. If they run out of cards before Jack appears
     //they take the discard pile, shuffle, and continue to discard
-    //If one player is out of cards, the only valid slap is for Jacks
-    if (e.key === 'q' && this.firstPlayer.hand.length != 0 && this.currentTurn === this.firstPlayer) {
+    if (player === this.firstPlayer && player.hand.length !== 0 && this.currentTurn === player) {
       this.cardsInDiscardPile.push(this.firstPlayer.playCard());
+      console.log(this.cardsInDiscardPile);
       this.currentTurn = this.secondPlayer;
-    } else if (e.key === 'p' && this.secondPlayer.hand.length != 0 && this.currentTurn === this.secondPlayer) {
+      this.checkTurn();
+    } else if (player === this.secondPlayer && player.hand.length !== 0 && this.currentTurn === player) {
       this.cardsInDiscardPile.push(this.secondPlayer.playCard());
+      console.log(this.cardsInDiscardPile);
+      this.currentTurn = this.firstPlayer;
+      this.checkTurn();
+    }
+  }
+
+  checkTurn() {
+    if (this.firstPlayer.hand.length === 0) {
+      this.currentTurn = this.secondPlayer;
+    } else if (this.secondPlayer.hand.length === 0) {
       this.currentTurn = this.firstPlayer;
     }
   }
 
-  slapCards(e) {
-    if (e.key === 'f' && this.cardsInDiscardPile.length != 0 && (this.checkForJack() || this.checkForDoubles() || this.checkForSandwich())) {
+
+  slapCards(player) {
+    if (player === this.firstPlayer && this.cardsInDiscardPile.length !== 0 && this.secondPlayer.hand.length !== 0 && this.checkValidity()) {
       this.firstPlayer.takePile(this, this.firstPlayer);
-    } else if (e.key === 'f') {
-      this.firstPlayer.badSlap();
-    } else if (e.key === 'j' && this.cardsInDiscardPile.length != 0 && (this.checkForJack() || this.checkForDoubles() || this.checkForSandwich())) {
+      console.log("GOOD SLAP");
+    } else if (player === this.firstPlayer && this.cardsInDiscardPile.length !== 0 && this.secondPlayer.hand.length === 0 && this.checkForJack()) {
+      this.firstPlayer.wins++;
+      //save win to saveWinsToStorage
+      //startNewGame
+    } else if (player === this.firstPlayer && player.hand.length === 0) {
+      this.secondPlayer.wins++
+      //save win to saveWinsToStorage
+      //startNewGame
+    } else if (player === this.firstPlayer) {
+      console.log("BAD SLAP");
+      this.secondPlayer.hand.push(this.firstPlayer.badSlap(this.firstPlayer));
+    } else if (player === this.secondPlayer && this.cardsInDiscardPile.length !== 0 && this.firstPlayer.hand.length !== 0 && this.checkValidity()) {
       this.secondPlayer.takePile(this, this.secondPlayer);
-    } else if (e.key === 'j') {
-      this.secondPlayer.badSlap();
+      console.log("GOOD SLAP");
+    } else if (player === this.secondPlayer && this.cardsInDiscardPile.length !== 0 && this.firstPlayer.hand.length === 0 && this.checkForJack()) {
+      this.secondPlayer.wins++;
+      //save win to saveWinsToStorage
+      //startNewGame
+    } else if (player === this.secondPlayer && player.hand.length === 0) {
+      this.firstPlayer.wins++;
+      //save win to saveWinsToStorage
+      //startNewGame
+    } else if (player === this.secondPlayer) {
+      this.firstPlayer.hand.push(this.secondPlayer.badSlap(this.secondPlayer));
+      console.log("BAD SLAP");
+    }
+  }
+
+  checkValidity() {
+    if (this.cardsInDiscardPile.length >= 3) {
+      return (this.checkForJack() || this.checkForDoubles() || this.checkForSandwich());
+    } else if (this.cardsInDiscardPile.length === 2) {
+      return (this.checkForJack() || this.checkForDoubles());
+    } else {
+      return (this.checkForJack());
     }
   }
 
   checkForJack() {
-    // var topCardIndex = this.cardsInDiscardPile.length - 1;
-    // var string = this.cardsInDiscardPile[topCardIndex];
-    var splitString = this.cardsInDiscardPile[this.cardsInDiscardPile.length - 1].split(' ');
-    if (splitString[1] === 'Jack') {
-      return true;
-    } else {
-      return false;
-    }
+    var topCard = this.cardsInDiscardPile[this.cardsInDiscardPile.length - 1];
+    var splitString = topCard.split(' ');
+    return (splitString[1] === 'Jack');
   }
 
   checkForDoubles() {
-    // var topCardIndex = this.cardsInDiscardPile.length - 1;
-    // var secondCardIndex = this.cardsInDiscardPile.length - 2;
-    // var firstString = this.cardsInDiscardPile[topCardIndex];
-    // var secondString = this.cardsInDiscardPile[secondCardIndex];
-    var splitFirst = this.cardsInDiscardPile[this.cardsInDiscardPile.length - 1].split(' ');
-    var splitSecond = this.cardsInDiscardPile[this.cardsInDiscardPile.length - 2].split(' ');
-    if (splitFirst[1] === splitSecond[1]) {
-      return true;
-    } else {
-      return false;
-    }
+    var topCard = this.cardsInDiscardPile[this.cardsInDiscardPile.length - 1];
+    var secondCard = this.cardsInDiscardPile[this.cardsInDiscardPile.length - 2];
+    var splitFirst = topCard.split(' ');
+    var splitSecond = secondCard.split(' ');
+    return (splitFirst[1] === splitSecond[1]);
   }
 
   checkForSandwich() {
-    // var topCardIndex = this.cardsInDiscardPile.length - 1;
-    // var thirdCardIndex = this.cardsInDiscardPile.length - 3;
-    // var firstString = this.cardsInDiscardPile[topCardIndex];
-    // var thirdString = this.cardsInDiscardPile[thirdCardIndex];
-    var splitFirst = this.cardsInDiscardPile[this.cardsInDiscardPile.length - 1].split(' ');
-    var splitThird = this.cardsInDiscardPile[this.cardsInDiscardPile.length - 3].split(' ');
-    if (splitFirst[1] === splitThird[1]) {
-      return true;
-    } else {
-      return false;
-    }
+    var topCard = this.cardsInDiscardPile[this.cardsInDiscardPile.length - 1];
+    var thirdCard = this.cardsInDiscardPile[this.cardsInDiscardPile.length - 3];
+    var splitFirst = topCard.split(' ');
+    var splitThird = thirdCard.split(' ');
+    return (splitFirst[1] === splitThird[1]);
   }
 
   updateWinCount(player) {
