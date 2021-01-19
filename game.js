@@ -37,17 +37,18 @@ class Game {
   addToDiscardPile(player) {
     //If one player is out of cards, the other player continues to discard. If they run out of cards before Jack appears
     //they take the discard pile, shuffle, and continue to discard
-    removeMsg();
     if (player === this.firstPlayer && player.hand.length !== 0 && this.currentTurn === player) {
       this.cardsInDiscardPile.push(this.firstPlayer.playCard());
       this.currentTurn = this.secondPlayer;
       this.checkTurn();
       renderDiscard();
+      removeMsg();
     } else if (player === this.secondPlayer && player.hand.length !== 0 && this.currentTurn === player) {
       this.cardsInDiscardPile.push(this.secondPlayer.playCard());
       this.currentTurn = this.firstPlayer;
       this.checkTurn();
       renderDiscard();
+      removeMsg();
     }
   }
 
@@ -76,7 +77,7 @@ class Game {
       //save win to saveWinsToStorage
       //startNewGame
     } else if (player === this.firstPlayer) {
-      console.log("BAD SLAP");
+      renderMsg(this.firstPlayer);
       this.secondPlayer.hand.push(this.firstPlayer.badSlap(this.firstPlayer));
     } else if (player === this.secondPlayer && this.cardsInDiscardPile.length !== 0 && this.firstPlayer.hand.length !== 0 && this.checkValidity()) {
       renderMsg(this.secondPlayer);
@@ -93,8 +94,8 @@ class Game {
       //save win to saveWinsToStorage
       //startNewGame
     } else if (player === this.secondPlayer) {
+      renderMsg(this.secondPlayer);
       this.firstPlayer.hand.push(this.secondPlayer.badSlap(this.secondPlayer));
-      console.log("BAD SLAP");
     }
   }
 

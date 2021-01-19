@@ -46,29 +46,30 @@ function removeDiscardPile() {
 
 function renderMsg(player) {
   gameMsgBox.classList.remove('hidden');
-  var playerNum = findPlayerNum(player);
-  if (newGame.checkForJack()) {
-    gameMsg.innerText = `SLAPJACK! PLAYER ${playerNum} TAKES THE PILE!`;
-  } else if (newGame.checkForDoubles()) {
-    gameMsg.innerText = `DOUBLE! PLAYER ${playerNum} TAKES THE PILE!`;
-  } else if (newGame.checkForSandwich()) {
+  var playerNum = findPlayerNum(player).playerNum;
+  var otherPlayerNum = findPlayerNum(player).otherPlayerNum;
+  if (newGame.cardsInDiscardPile.length >= 3 && newGame.checkForSandwich()) {
     gameMsg.innerText = `SANDWICH! PLAYER ${playerNum} TAKES THE PILE!`;
+  } else if (newGame.cardsInDiscardPile.length === 2 && newGame.checkForDoubles()) {
+    gameMsg.innerText = `DOUBLE! PLAYER ${playerNum} TAKES THE PILE!`;
+  } else if (newGame.checkForJack()) {
+    gameMsg.innerText = `SLAPJACK! PLAYER ${playerNum} TAKES THE PILE!`;
   } else {
-    gameMsg.innerText = `BAD SLAP! PLAYER ${playerNum} FORFEITS A CARD TO PLAYER ${playerNum}!`;
+    gameMsg.innerText = `BAD SLAP! PLAYER ${playerNum} FORFEITS A CARD TO PLAYER ${otherPlayerNum}!`;
   }
 }
 
 function findPlayerNum(player) {
   if (newGame.firstPlayer === player) {
-    return 1;
+    playerNum = 1;
+    otherPlayerNum = 2;
   } else if (newGame.secondPlayer === player) {
-    return 2;
+    playerNum = 2;
+    otherPlayerNum = 1;
   }
-}
-
-function renderBadSlapMsg() {
-  var playerNum = 1;
-  gameMsgBox.innerText = `BAD SLAP! PLAYER ${playerNum} FORFEITS A CARD TO PLAYER ${playerNum}!`;
+  return {
+    playerNum, otherPlayerNum
+  };
 }
 
 function removeMsg() {
