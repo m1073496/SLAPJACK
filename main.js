@@ -2,6 +2,8 @@
 var discardPile = document.querySelector('.discard-pile');
 var gameMsg = document.querySelector('.msg');
 var gameMsgBox = document.querySelector('.game-msg');
+var stackOne = document.querySelector('.stack-one');
+var stackTwo = document.querySelector('.stack-two');
 var winPlayerOne = document.querySelector('.player-one');
 var winPlayerTwo = document.querySelector('.player-two');
 var newGame;

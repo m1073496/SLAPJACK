@@ -55,8 +55,10 @@ class Game {
   checkTurn() {
     if (this.firstPlayer.hand.length === 0) {
       this.currentTurn = this.secondPlayer;
+      cloak(stackOne);
     } else if (this.secondPlayer.hand.length === 0) {
       this.currentTurn = this.firstPlayer;
+      cloak(stackTwo);
     }
   }
 
@@ -64,8 +66,9 @@ class Game {
   slapCards(player) {
     if (player === this.firstPlayer && this.cardsInDiscardPile.length !== 0 && this.secondPlayer.hand.length !== 0 && this.checkValidity()) {
       renderMsg(this.firstPlayer);
-      this.firstPlayer.takePile(this, this.firstPlayer);
       cloak(discardPile);
+      reveal(stackOne);
+      this.firstPlayer.takePile(this, this.firstPlayer);
     } else if (player === this.firstPlayer && this.cardsInDiscardPile.length !== 0 && this.secondPlayer.hand.length === 0 && this.checkForJack()) {
       cloak(discardPile);
       this.updateWinCount(player);
@@ -81,8 +84,9 @@ class Game {
       this.secondPlayer.hand.push(this.firstPlayer.badSlap(this.firstPlayer));
     } else if (player === this.secondPlayer && this.cardsInDiscardPile.length !== 0 && this.firstPlayer.hand.length !== 0 && this.checkValidity()) {
       renderMsg(this.secondPlayer);
-      this.secondPlayer.takePile(this, this.secondPlayer);
       cloak(discardPile);
+      reveal(stackTwo);
+      this.secondPlayer.takePile(this, this.secondPlayer);
     } else if (player === this.secondPlayer && this.cardsInDiscardPile.length !== 0 && this.firstPlayer.hand.length === 0 && this.checkForJack()) {
       cloak(discardPile);
       this.updateWinCount(player);
