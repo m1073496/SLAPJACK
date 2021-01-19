@@ -1,5 +1,6 @@
 //Variables
 var discardPile = document.querySelector('.discard-pile');
+var gameMsg = document.querySelector('.msg');
 var newGame;
 
 //Event Listeners
@@ -40,4 +41,29 @@ function renderDiscard() {
 function removeDiscardPile() {
   discardPile.classList.add('hidden');
   //Message for good slap
+}
+
+function renderSlapJackMsg() {
+  var playerNum = 1;
+  gameMsg.innerText = `SLAPJACK! PLAYER ${playerNum} TAKES THE PILE!`;
+}
+
+function renderDoubleMsg() {
+  var playerNum = 1;
+  gameMsg.innerText = `DOUBLE! PLAYER ${playerNum} TAKES THE PILE!`;
+}
+
+function renderSandwichMsg() {
+  var playerNum = 1;
+  gameMsg.innerText = `SANDWICH! PLAYER ${playerNum} TAKES THE PILE!`;
+}
+
+function renderBadSlapMsg() {
+  var playerNum = 1;
+  gameMsg.innerText = `BAD SLAP! PLAYER ${playerNum} FORFEITS A CARD TO PLAYER ${playerNum}!`;
+}
+
+function renderWinnerMsg() {
+  var playerNum = 1;
+  gameMsg.innerText = `${playerNum} WINS!`;
 }
