@@ -67,15 +67,13 @@ class Game {
       this.firstPlayer.takePile(this, this.firstPlayer);
       removeDiscardPile();
     } else if (player === this.firstPlayer && this.cardsInDiscardPile.length !== 0 && this.secondPlayer.hand.length === 0 && this.checkForJack()) {
-      this.firstPlayer.wins++;
       removeDiscardPile();
-      updateWinCount(player);
+      this.updateWinCount(player);
       //save win to saveWinsToStorage
       //startNewGame
     } else if (player === this.firstPlayer && player.hand.length === 0) {
-      this.secondPlayer.wins++
       removeDiscardPile();
-      updateWinCount(this.secondPlayer);
+      this.updateWinCount(this.secondPlayer);
       //save win to saveWinsToStorage
       //startNewGame
     } else if (player === this.firstPlayer) {
@@ -86,15 +84,13 @@ class Game {
       this.secondPlayer.takePile(this, this.secondPlayer);
       removeDiscardPile();
     } else if (player === this.secondPlayer && this.cardsInDiscardPile.length !== 0 && this.firstPlayer.hand.length === 0 && this.checkForJack()) {
-      this.secondPlayer.wins++;
       removeDiscardPile();
-      updateWinCount(player);
+      this.updateWinCount(player);
       //save win to saveWinsToStorage
       //startNewGame
     } else if (player === this.secondPlayer && player.hand.length === 0) {
-      this.firstPlayer.wins++;
       removeDiscardPile();
-      updateWinCount(this.firstPlayer);
+      this.updateWinCount(this.firstPlayer);
       //save win to saveWinsToStorage
       //startNewGame
     } else if (player === this.secondPlayer) {
@@ -106,7 +102,7 @@ class Game {
   checkValidity() {
     if (this.cardsInDiscardPile.length >= 3) {
       return (this.checkForJack() || this.checkForDoubles() || this.checkForSandwich());
-    } else if (this.cardsInDiscardPile.length === 2) {
+    } else if (this.cardsInDiscardPile.length >= 2) {
       return (this.checkForJack() || this.checkForDoubles());
     } else {
       return (this.checkForJack());
@@ -136,9 +132,13 @@ class Game {
   }
 
   updateWinCount(player) {
-    //this will update player.wins property
-    //player wins when other player is out of cards and fails to slap the next Jack that arises
-    //OR player wins when other player is out of cards and slaps anything other than a Jack
+    if (player === this.firstPlayer) {
+      this.firstPlayer.wins++;
+      renderWin(player);
+    } else if (player === this.secondPlayer) {
+      this.secondPlayer.wins++;
+      renderWin(player);
+    }
   }
 
 

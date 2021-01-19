@@ -47,12 +47,12 @@ function removeDiscardPile() {
 }
 
 function renderMsg(player) {
-  gameMsgBox.classList.remove('hidden');
+  showMsg()
   var playerNum = findPlayerNum(player).playerNum;
   var otherPlayerNum = findPlayerNum(player).otherPlayerNum;
   if (newGame.cardsInDiscardPile.length >= 3 && newGame.checkForSandwich()) {
     gameMsg.innerText = `SANDWICH! PLAYER ${playerNum} TAKES THE PILE!`;
-  } else if (newGame.cardsInDiscardPile.length === 2 && newGame.checkForDoubles()) {
+  } else if (newGame.cardsInDiscardPile.length >= 2 && newGame.checkForDoubles()) {
     gameMsg.innerText = `DOUBLE! PLAYER ${playerNum} TAKES THE PILE!`;
   } else if (newGame.checkForJack()) {
     gameMsg.innerText = `SLAPJACK! PLAYER ${playerNum} TAKES THE PILE!`;
@@ -78,15 +78,18 @@ function removeMsg() {
   gameMsgBox.classList.add('hidden');
 }
 
-// function renderWinnerMsg() {
-//   var playerNum = 1;
-//   gameMsg.innerText = `${playerNum} WINS!`;
-// }
+function showMsg() {
+  gameMsgBox.classList.remove('hidden');
+}
 
-function updateWinCount(player) {
+function renderWin(player) {
   if (player === newGame.firstPlayer) {
     winPlayerOne.innerText = player.wins;
+    showMsg();
+    gameMsg.innerText = `PLATYER 1 WINS!`;
   } else if (player === newGame.secondPlayer) {
     winPlayerTwo.innerText = player.wins;
+    showMsg();
+    gameMsg.innerText = `PLAYER 2 WINS!`;
   }
 }
