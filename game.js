@@ -5,9 +5,6 @@ class Game {
     this.allCards = allCards;
     this.cardsInPlay = [];
     this.cardsInDiscardPile = [];
-    this.topCard = this.cardsInDiscardPile[this.cardsInDiscardPile.length - 1];
-    this.secondCard = this.cardsInDiscardPile[this.cardsInDiscardPile.length - 2];
-    this.thirdCard = this.cardsInDiscardPile[this.cardsInDiscardPile.length - 3];
     this.currentTurn;
   }
 
@@ -57,31 +54,40 @@ class Game {
   }
 
   slapCards(e) {
-    if (e.key === 'f' && this.cardsInDiscardPile.length !== 0 && (this.checkForJack() || this.checkForDoubles() || this.checkForSandwich())) {
+    if (e.key === 'f' && this.cardsInDiscardPile.length !== 0 && this.checkValidity()) {
       this.firstPlayer.takePile(this, this.firstPlayer);
     } else if (e.key === 'f') {
       this.firstPlayer.badSlap();
-    } else if (e.key === 'j' && this.cardsInDiscardPile.length !== 0 && (this.checkForJack() || this.checkForDoubles() || this.checkForSandwich())) {
+    } else if (e.key === 'j' && this.cardsInDiscardPile.length !== 0 && this.checkValidity()) {
       this.secondPlayer.takePile(this, this.secondPlayer);
     } else if (e.key === 'j') {
       this.secondPlayer.badSlap();
     }
   }
 
+  checkValidity() {
+    return (this.checkForJack() || this.checkForDoubles() || this.checkForSandwich());
+  }
+
   checkForJack() {
-    var splitString = this.topCard.split(' ');
+    var topCard = this.cardsInDiscardPile[this.cardsInDiscardPile.length - 1];
+    var splitString = topCard.split(' ');
     return (splitString[1] === 'Jack');
   }
 
   checkForDoubles() {
-    var splitFirst = this.topCard.split(' ');
-    var splitSecond = this.secondCard.split(' ');
+    var topCard = this.cardsInDiscardPile[this.cardsInDiscardPile.length - 1];
+    var secondCard = this.cardsInDiscardPile[this.cardsInDiscardPile.length - 2];
+    var splitFirst = topCard.split(' ');
+    var splitSecond = secondCard.split(' ');
     return (splitFirst[1] === splitSecond[1]);
   }
 
   checkForSandwich() {
-    var splitFirst = this.topCard.split(' ');
-    var splitThird = this.thirdCard.split(' ');
+    var topCard = this.cardsInDiscardPile[this.cardsInDiscardPile.length - 1];
+    var thirdCard = this.cardsInDiscardPile[this.cardsInDiscardPile.length - 3];
+    var splitFirst = topCard.split(' ');
+    var splitThird = thirdCard.split(' ');
     return (splitFirst[1] === splitThird[1]);
   }
 
