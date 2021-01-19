@@ -30,13 +30,8 @@ class Game {
     }
   }
 
-  startNewGame() {
-    //this will reset the deck and players (perhaps a new card deck shuffle as well)
-    this.allCards = allCards;
-    this.cardsInPlay = [];
-    this.cardsInDiscardPile = [];
-    this.firstPlayer = new Player();
-    this.secondPlayer = new Player();
+  resetGame() {
+    startNewGame();
   }
 
   addToDiscardPile(player) {
@@ -73,6 +68,7 @@ class Game {
       this.firstPlayer.wins++;
     } else if (player === this.firstPlayer && player.hand.length === 0) {
       this.secondPlayer.wins++
+      this.startNewGame();
     } else if (player === this.firstPlayer) {
       console.log("BAD SLAP");
       this.secondPlayer.hand.push(this.firstPlayer.badSlap(this.firstPlayer));

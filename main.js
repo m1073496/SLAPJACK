@@ -7,13 +7,14 @@ document.addEventListener('keydown', checkPlayerMove);
 
 
 //Functions
-window.onload = function() {
+window.addEventListener('load', startNewGame);
+
+function startNewGame() {
   newGame = new Game();
   newGame.shuffleDeck(newGame.allCards);
   newGame.dealCards();
   newGame.currentTurn = newGame.firstPlayer;
-}
-
+};
 
 function checkPlayerMove(e) {
   if (e.key === 'q') {
