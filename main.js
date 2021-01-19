@@ -32,8 +32,7 @@ function checkPlayerMove(e) {
 
 function renderDiscard(cardString) {
   discardPile.classList.remove('hidden');
-  discardPile.innerHTML = `<img class="discard-pile" src="./assets/green-jack.png">`;
+  var topCardIndex = newGame.cardsInDiscardPile.length - 1;
+  var cardImage = newGame.cardsInDiscardPile[topCardIndex];
+  discardPile.innerHTML = `<img class="discard-pile" src="./assets/${cardImage}.png">`;
 }
-//I need a function that will display the card that corresponds to the string that a Player
-//discards on the DOM, in place of the center cardDeck
-//I should build a function that replaces that HTML element, innerHTML, with my image

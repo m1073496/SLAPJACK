@@ -103,23 +103,23 @@ class Game {
 
   checkForJack() {
     var topCard = this.cardsInDiscardPile[this.cardsInDiscardPile.length - 1];
-    var splitString = topCard.split(' ');
-    return (splitString[1] === 'Jack');
+    var splitString = topCard.split('-');
+    return (splitString[1] === 'jack');
   }
 
   checkForDoubles() {
     var topCard = this.cardsInDiscardPile[this.cardsInDiscardPile.length - 1];
     var secondCard = this.cardsInDiscardPile[this.cardsInDiscardPile.length - 2];
-    var splitFirst = topCard.split(' ');
-    var splitSecond = secondCard.split(' ');
+    var splitFirst = topCard.split('-');
+    var splitSecond = secondCard.split('-');
     return (splitFirst[1] === splitSecond[1]);
   }
 
   checkForSandwich() {
     var topCard = this.cardsInDiscardPile[this.cardsInDiscardPile.length - 1];
     var thirdCard = this.cardsInDiscardPile[this.cardsInDiscardPile.length - 3];
-    var splitFirst = topCard.split(' ');
-    var splitThird = thirdCard.split(' ');
+    var splitFirst = topCard.split('-');
+    var splitThird = thirdCard.split('-');
     return (splitFirst[1] === splitThird[1]);
   }
 
