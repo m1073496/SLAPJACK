@@ -5,6 +5,9 @@ class Game {
     this.allCards = allCards;
     this.cardsInPlay = [];
     this.cardsInDiscardPile = [];
+    this.topCard = this.cardsInDiscardPile[this.cardsInDiscardPile.length - 1];
+    this.secondCard = this.cardsInDiscardPile[this.cardsInDiscardPile.length - 2];
+    this.thirdCard = this.cardsInDiscardPile[this.cardsInDiscardPile.length - 3];
     this.currentTurn;
   }
 
@@ -54,11 +57,11 @@ class Game {
   }
 
   slapCards(e) {
-    if (e.key === 'f' && this.cardsInDiscardPile.length != 0 && (this.checkForJack() || this.checkForDoubles() || this.checkForSandwich())) {
+    if (e.key === 'f' && this.cardsInDiscardPile.length !== 0 && (this.checkForJack() || this.checkForDoubles() || this.checkForSandwich())) {
       this.firstPlayer.takePile(this, this.firstPlayer);
     } else if (e.key === 'f') {
       this.firstPlayer.badSlap();
-    } else if (e.key === 'j' && this.cardsInDiscardPile.length != 0 && (this.checkForJack() || this.checkForDoubles() || this.checkForSandwich())) {
+    } else if (e.key === 'j' && this.cardsInDiscardPile.length !== 0 && (this.checkForJack() || this.checkForDoubles() || this.checkForSandwich())) {
       this.secondPlayer.takePile(this, this.secondPlayer);
     } else if (e.key === 'j') {
       this.secondPlayer.badSlap();
@@ -66,42 +69,20 @@ class Game {
   }
 
   checkForJack() {
-    // var topCardIndex = this.cardsInDiscardPile.length - 1;
-    // var string = this.cardsInDiscardPile[topCardIndex];
-    var splitString = this.cardsInDiscardPile[this.cardsInDiscardPile.length - 1].split(' ');
-    if (splitString[1] === 'Jack') {
-      return true;
-    } else {
-      return false;
-    }
+    var splitString = this.topCard.split(' ');
+    return (splitString[1] === 'Jack');
   }
 
   checkForDoubles() {
-    // var topCardIndex = this.cardsInDiscardPile.length - 1;
-    // var secondCardIndex = this.cardsInDiscardPile.length - 2;
-    // var firstString = this.cardsInDiscardPile[topCardIndex];
-    // var secondString = this.cardsInDiscardPile[secondCardIndex];
-    var splitFirst = this.cardsInDiscardPile[this.cardsInDiscardPile.length - 1].split(' ');
-    var splitSecond = this.cardsInDiscardPile[this.cardsInDiscardPile.length - 2].split(' ');
-    if (splitFirst[1] === splitSecond[1]) {
-      return true;
-    } else {
-      return false;
-    }
+    var splitFirst = this.topCard.split(' ');
+    var splitSecond = this.secondCard.split(' ');
+    return (splitFirst[1] === splitSecond[1]);
   }
 
   checkForSandwich() {
-    // var topCardIndex = this.cardsInDiscardPile.length - 1;
-    // var thirdCardIndex = this.cardsInDiscardPile.length - 3;
-    // var firstString = this.cardsInDiscardPile[topCardIndex];
-    // var thirdString = this.cardsInDiscardPile[thirdCardIndex];
-    var splitFirst = this.cardsInDiscardPile[this.cardsInDiscardPile.length - 1].split(' ');
-    var splitThird = this.cardsInDiscardPile[this.cardsInDiscardPile.length - 3].split(' ');
-    if (splitFirst[1] === splitThird[1]) {
-      return true;
-    } else {
-      return false;
-    }
+    var splitFirst = this.topCard.split(' ');
+    var splitThird = this.thirdCard.split(' ');
+    return (splitFirst[1] === splitThird[1]);
   }
 
   updateWinCount(player) {
