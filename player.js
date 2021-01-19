@@ -25,11 +25,8 @@ class Player {
   }
 
   badSlap(player) {
-    var forfeitedCard = player.hand.length - 1;
-    var removedCard = player.hand.splice(forfeitedCard, 1);
+    var removedCard = player.hand.splice(0, 1);
     return removedCard.toString();
-    //Player who slaps loses the card on top of their hand,
-    //this card goes to the bottom of the other player's hand
   }
 
 }
