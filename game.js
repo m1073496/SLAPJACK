@@ -40,23 +40,31 @@ class Game {
     if (player === this.firstPlayer && player.hand.length !== 0 && this.currentTurn === player) {
       this.cardsInDiscardPile.push(this.firstPlayer.playCard());
       this.currentTurn = this.secondPlayer;
-      this.checkTurn();
+      this.checkTurn(player);
       renderDiscard();
-      removeMsg();
+      cloak(gameMsgBox);
     } else if (player === this.secondPlayer && player.hand.length !== 0 && this.currentTurn === player) {
       this.cardsInDiscardPile.push(this.secondPlayer.playCard());
       this.currentTurn = this.firstPlayer;
-      this.checkTurn();
+      this.checkTurn(player);
       renderDiscard();
-      removeMsg();
+      cloak(gameMsgBox);
     }
   }
 
-  checkTurn() {
-    if (this.firstPlayer.hand.length === 0) {
+  checkTurn(player) {
+    var firstHand = this.firstPlayer.hand.length;
+    var secondHand = this.secondPlayer.hand.length;
+    if (firstHand === 0 && secondHand === 0) {
+      this.currentTurn = player;
+      cloak(stackOne);
+      cloak(stackTwo);
+    } else if (firstHand === 0 && secondHand !== 0) {
       this.currentTurn = this.secondPlayer;
-    } else if (this.secondPlayer.hand.length === 0) {
+      cloak(stackOne);
+    } else if (secondHand === 0 && firstHand !== 0) {
       this.currentTurn = this.firstPlayer;
+      cloak(stackTwo);
     }
   }
 
@@ -64,37 +72,41 @@ class Game {
   slapCards(player) {
     if (player === this.firstPlayer && this.cardsInDiscardPile.length !== 0 && this.secondPlayer.hand.length !== 0 && this.checkValidity()) {
       renderMsg(this.firstPlayer);
+      cloak(discardPile);
+      reveal(stackOne);
       this.firstPlayer.takePile(this, this.firstPlayer);
-      removeDiscardPile();
     } else if (player === this.firstPlayer && this.cardsInDiscardPile.length !== 0 && this.secondPlayer.hand.length === 0 && this.checkForJack()) {
-      this.firstPlayer.wins++;
-      removeDiscardPile();
+      cloak(discardPile);
+      this.updateWinCount(player);
       //save win to saveWinsToStorage
       //startNewGame
     } else if (player === this.firstPlayer && player.hand.length === 0) {
-      this.secondPlayer.wins++
-      removeDiscardPile();
+      cloak(discardPile);
+      this.updateWinCount(this.secondPlayer);
       //save win to saveWinsToStorage
       //startNewGame
     } else if (player === this.firstPlayer) {
       renderMsg(this.firstPlayer);
+      reveal(stackTwo);
       this.secondPlayer.hand.push(this.firstPlayer.badSlap(this.firstPlayer));
     } else if (player === this.secondPlayer && this.cardsInDiscardPile.length !== 0 && this.firstPlayer.hand.length !== 0 && this.checkValidity()) {
       renderMsg(this.secondPlayer);
+      cloak(discardPile);
+      reveal(stackTwo);
       this.secondPlayer.takePile(this, this.secondPlayer);
-      removeDiscardPile();
     } else if (player === this.secondPlayer && this.cardsInDiscardPile.length !== 0 && this.firstPlayer.hand.length === 0 && this.checkForJack()) {
-      this.secondPlayer.wins++;
-      removeDiscardPile();
+      cloak(discardPile);
+      this.updateWinCount(player);
       //save win to saveWinsToStorage
       //startNewGame
     } else if (player === this.secondPlayer && player.hand.length === 0) {
-      this.firstPlayer.wins++;
-      removeDiscardPile();
+      cloak(discardPile);
+      this.updateWinCount(this.firstPlayer);
       //save win to saveWinsToStorage
       //startNewGame
     } else if (player === this.secondPlayer) {
       renderMsg(this.secondPlayer);
+      reveal(stackOne);
       this.firstPlayer.hand.push(this.secondPlayer.badSlap(this.secondPlayer));
     }
   }
@@ -102,7 +114,7 @@ class Game {
   checkValidity() {
     if (this.cardsInDiscardPile.length >= 3) {
       return (this.checkForJack() || this.checkForDoubles() || this.checkForSandwich());
-    } else if (this.cardsInDiscardPile.length === 2) {
+    } else if (this.cardsInDiscardPile.length >= 2) {
       return (this.checkForJack() || this.checkForDoubles());
     } else {
       return (this.checkForJack());
@@ -132,9 +144,13 @@ class Game {
   }
 
   updateWinCount(player) {
-    //this will update player.wins property
-    //player wins when other player is out of cards and fails to slap the next Jack that arises
-    //OR player wins when other player is out of cards and slaps anything other than a Jack
+    if (player === this.firstPlayer) {
+      this.firstPlayer.wins++;
+      renderWin(player);
+    } else if (player === this.secondPlayer) {
+      this.secondPlayer.wins++;
+      renderWin(player);
+    }
   }
 
 

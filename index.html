@@ -9,22 +9,25 @@
   <body>
     <header class="header">
         <div class="game-msg">
-          <h1 class="msg"></h1>
+          <h1 class="msg">SLAPJACK!</h1>
         </div>
     </header>
-    <main class="card-stacks-container">
-      <section class="player-cards">
-        <article class="stack-one">
+    <main class="main">
+      <section class="card-stacks-container">
+        <section class="player-cards">
+          <article class="stack-one">
+          </article>
+          <h2 class="win-counter">Wins: <span class="player-one">0</span></h2>
+        </section>
+        <article class="discard-pile hidden">
         </article>
-        <h2 class="win-counter player-one"># Wins</h2>
+        <section class="player-cards">
+          <article class="stack-two">
+          </article>
+          <h2 class="win-counter">Wins: <span class="player-two">0</span></h2>
+        </section>
       </section>
-      <article class="discard-pile hidden">
-      </article>
-      <section class="player-cards">
-        <article class="stack-two">
-        </article>
-        <h2 class="win-counter player-two"># Wins</h2>
-      </section>
+      <button class="new-game-button">Start New Game</button>
     </main>
     <script src="./main.js"></script>
     <script src="./player.js"></script>
