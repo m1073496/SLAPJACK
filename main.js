@@ -7,19 +7,18 @@ var stackTwo = document.querySelector('.stack-two');
 var winsPlayerOne = document.querySelector('.player-one');
 var winsPlayerTwo = document.querySelector('.player-two');
 var newGameButton = document.querySelector('.new-game-button');
-var newGame;
+var newGame = new Game();
 
 //Event Listeners
 document.addEventListener('keydown', checkPlayerMove);
 window.addEventListener('load', startNewGame);
 newGameButton.addEventListener('click', startNewGame);
 
-
 //Functions
 function startNewGame() {
-  newGame = new Game();
   newGame.shuffleDeck(newGame.allCards);
   newGame.dealCards();
+  renderStoredWins();
   reveal(stackOne);
   reveal(stackTwo);
   cloak(discardPile);
@@ -81,16 +80,21 @@ function renderPlayerDeck(player) {
 
 function renderWin(player) {
   if (player === newGame.firstPlayer) {
-    winsPlayerOne.innerText = player.wins;
     gameMsg.innerText = `PLAYER 1 WINS!`;
+    renderStoredWins();
     reveal(gameMsgBox);
     reveal(newGameButton);
   } else if (player === newGame.secondPlayer) {
-    winsPlayerTwo.innerText = player.wins;
     gameMsg.innerText = `PLAYER 2 WINS!`;
+    renderStoredWins();
     reveal(gameMsgBox);
     reveal(newGameButton);
   }
+}
+
+function renderStoredWins() {
+  winsPlayerOne.innerText = localStorage.getItem('firstPlayerWins') || 0;
+  winsPlayerTwo.innerText = localStorage.getItem('secondPlayerWins') || 0;
 }
 
 function checkPlayerOneSlap(player) {

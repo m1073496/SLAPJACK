@@ -10,7 +10,12 @@ class Player {
       return card.toString();
   }
 
-  saveWinsToStorage() {
+  saveWinsToStorage(player) {
+    if (player === newGame.firstPlayer) {
+      localStorage.setItem('firstPlayerWins', this.wins);
+    } else if (player === newGame.secondPlayer) {
+      localStorage.setItem('secondPlayerWins', this.wins);
+    }
   }
 
   takePile(game, player) {
