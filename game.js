@@ -31,7 +31,6 @@ class Game {
   }
 
   resetGame() {
-    cloak(discardPile);
     startNewGame();
   }
 
@@ -78,14 +77,12 @@ class Game {
       this.firstPlayer.takePile(this, this.firstPlayer);
     } else if (player === this.firstPlayer && this.cardsInDiscardPile.length !== 0 && this.secondPlayer.hand.length === 0 && this.checkForJack()) {
       cloak(discardPile);
+      reveal(newGameButton);
       this.updateWinCount(player);
-      //save win to saveWinsToStorage
-      //startNewGame
     } else if (player === this.firstPlayer && player.hand.length === 0) {
       cloak(discardPile);
+      reveal(newGameButton);
       this.updateWinCount(this.secondPlayer);
-      //save win to saveWinsToStorage
-      //startNewGame
     } else if (player === this.firstPlayer) {
       renderMsg(this.firstPlayer);
       reveal(stackTwo);
@@ -97,14 +94,12 @@ class Game {
       this.secondPlayer.takePile(this, this.secondPlayer);
     } else if (player === this.secondPlayer && this.cardsInDiscardPile.length !== 0 && this.firstPlayer.hand.length === 0 && this.checkForJack()) {
       cloak(discardPile);
+      reveal(newGameButton);
       this.updateWinCount(player);
-      //save win to saveWinsToStorage
-      //startNewGame
     } else if (player === this.secondPlayer && player.hand.length === 0) {
       cloak(discardPile);
+      reveal(newGameButton);
       this.updateWinCount(this.firstPlayer);
-      //save win to saveWinsToStorage
-      //startNewGame
     } else if (player === this.secondPlayer) {
       renderMsg(this.secondPlayer);
       reveal(stackOne);

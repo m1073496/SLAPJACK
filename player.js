@@ -19,8 +19,8 @@ class Player {
       player.hand.push(game.cardsInDiscardPile[i]);
     }
     game.shuffleDeck(player.hand);
-    player.hand = game.cardsInPlay;
-    game.cardsInPlay = [];
+    player.hand = game.shuffledCards;
+    game.shuffledCards = [];
     game.cardsInDiscardPile = [];
   }
 

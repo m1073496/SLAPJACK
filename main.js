@@ -11,16 +11,20 @@ var newGame;
 
 //Event Listeners
 document.addEventListener('keydown', checkPlayerMove);
-
+window.addEventListener('load', startNewGame);
+newGameButton.addEventListener('click', startNewGame);
 
 
 //Functions
-window.addEventListener('load', startNewGame);
-
 function startNewGame() {
   newGame = new Game();
   newGame.shuffleDeck(newGame.allCards);
   newGame.dealCards();
+  reveal(stackOne);
+  reveal(stackTwo);
+  cloak(discardPile);
+  cloak(newGameButton);
+  gameMsg.innerText = `SLAPJACK!`;
 };
 
 function cloak(element) {
