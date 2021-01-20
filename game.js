@@ -67,18 +67,18 @@ class Game {
 
 
   slapCards(player) {
-    if (player === this.firstPlayer && this.cardsInDiscardPile.length !== 0 && this.secondPlayer.hand.length !== 0 && this.checkValidity()) {
+    if (player === this.firstPlayer && this.cardsInDiscardPile.length !== 0 && this.secondPlayer.hand.length !== 0 && checkValidity()) {
       validSlap(player);
-    } else if (player === this.firstPlayer && this.cardsInDiscardPile.length !== 0 && this.secondPlayer.hand.length === 0 && this.checkForJack()) {
+    } else if (player === this.firstPlayer && this.cardsInDiscardPile.length !== 0 && this.secondPlayer.hand.length === 0 && checkForJack()) {
       winGame(player);
     } else if (player === this.firstPlayer && player.hand.length === 0) {
       reveal(newGameButton);
       this.updateWinCount(this.secondPlayer);
     } else if (player === this.firstPlayer) {
       invalidSlap(player);
-    } else if (player === this.secondPlayer && this.cardsInDiscardPile.length !== 0 && this.firstPlayer.hand.length !== 0 && this.checkValidity()) {
+    } else if (player === this.secondPlayer && this.cardsInDiscardPile.length !== 0 && this.firstPlayer.hand.length !== 0 && checkValidity()) {
       validSlap(player);
-    } else if (player === this.secondPlayer && this.cardsInDiscardPile.length !== 0 && this.firstPlayer.hand.length === 0 && this.checkForJack()) {
+    } else if (player === this.secondPlayer && this.cardsInDiscardPile.length !== 0 && this.firstPlayer.hand.length === 0 && checkForJack()) {
       winGame(player);
     } else if (player === this.secondPlayer && player.hand.length === 0) {
       reveal(newGameButton);
@@ -86,38 +86,6 @@ class Game {
     } else if (player === this.secondPlayer) {
       invalidSlap(player);
     }
-  }
-
-  checkValidity() {
-    if (this.cardsInDiscardPile.length >= 3) {
-      return (this.checkForJack() || this.checkForDoubles() || this.checkForSandwich());
-    } else if (this.cardsInDiscardPile.length >= 2) {
-      return (this.checkForJack() || this.checkForDoubles());
-    } else {
-      return (this.checkForJack());
-    }
-  }
-
-  checkForJack() {
-    var topCard = this.cardsInDiscardPile[this.cardsInDiscardPile.length - 1];
-    var splitString = topCard.split('-');
-    return (splitString[1] === 'jack');
-  }
-
-  checkForDoubles() {
-    var topCard = this.cardsInDiscardPile[this.cardsInDiscardPile.length - 1];
-    var secondCard = this.cardsInDiscardPile[this.cardsInDiscardPile.length - 2];
-    var splitFirst = topCard.split('-');
-    var splitSecond = secondCard.split('-');
-    return (splitFirst[1] === splitSecond[1]);
-  }
-
-  checkForSandwich() {
-    var topCard = this.cardsInDiscardPile[this.cardsInDiscardPile.length - 1];
-    var thirdCard = this.cardsInDiscardPile[this.cardsInDiscardPile.length - 3];
-    var splitFirst = topCard.split('-');
-    var splitThird = thirdCard.split('-');
-    return (splitFirst[1] === splitThird[1]);
   }
 
   updateWinCount(player) {
