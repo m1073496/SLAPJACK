@@ -11,22 +11,14 @@ class Player {
   }
 
   saveWinsToStorage() {
-    //this will save this.wins value to local storage
   }
 
   takePile(game, player) {
-    for (var i = 0; i < game.cardsInDiscardPile.length; i++) {
-      player.hand.push(game.cardsInDiscardPile[i]);
-    }
-    game.shuffleDeck(player.hand);
-    player.hand = game.cardsInPlay;
-    game.cardsInPlay = [];
-    game.cardsInDiscardPile = [];
+    shuffleDiscardPile(player);
   }
 
   badSlap(player) {
     var removedCard = player.hand.splice(0, 1);
     return removedCard.toString();
   }
-
 }
