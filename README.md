@@ -53,10 +53,9 @@ This is a Turing School of Software and Design Module 1 solo project. The task w
 ## Features
 
 + [Desktop Layout](#desktop-layout)
-+ [Create Random Cover](#create-random-cover)
-+ [Make Your Own Cover](#create-your-own-cover)
-+ [Save Cover](#save-cover)
-+ [Delete Cover](#delete-cover)
++ [Discarding](#Discarding)
++ [SLapping a Card](#slapping-a-card)
++ [Winning the Game](#winning-the-game)
 
 
 ## DeskTop Layout
