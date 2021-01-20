@@ -34,7 +34,7 @@ This is a Turing School of Software and Design Module 1 solo project. The task w
 
 ## Learning Goals
 
-** Solidify and demonstrate an understanding of:
+**Solidify and demonstrate an understanding of:**
   - DRY JavaScript
   - Event delegation to handle similar event listeners
   - Understand the difference between the data model and how the data is displayed on the DOM
