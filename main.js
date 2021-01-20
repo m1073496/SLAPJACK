@@ -113,12 +113,11 @@ function winGame(player) {
 }
 
 function invalidSlap(player) {
+  renderMsg(player);
   if (findPlayerNum(player).playerNum === 1) {
-    renderMsg(player);
     reveal(stackTwo);
     newGame.secondPlayer.hand.push(player.badSlap(player));
   } else if (findPlayerNum(player).playerNum === 2) {
-    renderMsg(player);
     reveal(stackOne);
     newGame.firstPlayer.hand.push(player.badSlap(player));
   }
