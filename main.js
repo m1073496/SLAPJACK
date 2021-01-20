@@ -50,6 +50,7 @@ function checkPlayerMove(e) {
 
 function renderDiscard() {
   reveal(discardPile);
+  cloak(gameMsgBox);
   var topCardIndex = newGame.cardsInDiscardPile.length - 1;
   var cardImage = newGame.cardsInDiscardPile[topCardIndex];
   discardPile.innerHTML = `<img class="discard-pile" src="./assets/${cardImage}.png">`;
@@ -95,5 +96,30 @@ function renderWin(player) {
     gameMsg.innerText = `PLAYER 2 WINS!`;
     reveal(gameMsgBox);
     reveal(newGameButton);
+  }
+}
+
+function validSlap(player) {
+  renderMsg(player);
+  cloak(discardPile);
+  reveal(stackOne);
+  player.takePile(newGame, player);
+}
+
+function winGame(player) {
+  cloak(discardPile);
+  reveal(newGameButton);
+  newGame.updateWinCount(player);
+}
+
+function invalidSlap(player) {
+  if (findPlayerNum(player).playerNum === 1) {
+    renderMsg(player);
+    reveal(stackTwo);
+    newGame.secondPlayer.hand.push(player.badSlap(player));
+  } else if (findPlayerNum(player).playerNum === 2) {
+    renderMsg(player);
+    reveal(stackOne);
+    newGame.firstPlayer.hand.push(player.badSlap(player));
   }
 }

@@ -35,20 +35,17 @@ class Game {
   }
 
   addToDiscardPile(player) {
-    //If one player is out of cards, the other player continues to discard. If they run out of cards before Jack appears
-    //they take the discard pile, shuffle, and continue to discard
+    cloak(gameMsgBox);
     if (player === this.firstPlayer && player.hand.length !== 0 && this.currentTurn === player) {
       this.cardsInDiscardPile.push(this.firstPlayer.playCard());
       this.currentTurn = this.secondPlayer;
-      renderDiscard();
       this.checkTurn(player);
-      cloak(gameMsgBox);
+      renderDiscard();
     } else if (player === this.secondPlayer && player.hand.length !== 0 && this.currentTurn === player) {
       this.cardsInDiscardPile.push(this.secondPlayer.playCard());
       this.currentTurn = this.firstPlayer;
       this.checkTurn(player);
       renderDiscard();
-      cloak(gameMsgBox);
     }
   }
 
@@ -71,39 +68,23 @@ class Game {
 
   slapCards(player) {
     if (player === this.firstPlayer && this.cardsInDiscardPile.length !== 0 && this.secondPlayer.hand.length !== 0 && this.checkValidity()) {
-      renderMsg(this.firstPlayer);
-      cloak(discardPile);
-      reveal(stackOne);
-      this.firstPlayer.takePile(this, this.firstPlayer);
+      validSlap(player);
     } else if (player === this.firstPlayer && this.cardsInDiscardPile.length !== 0 && this.secondPlayer.hand.length === 0 && this.checkForJack()) {
-      cloak(discardPile);
-      reveal(newGameButton);
-      this.updateWinCount(player);
+      winGame(player);
     } else if (player === this.firstPlayer && player.hand.length === 0) {
-      cloak(discardPile);
       reveal(newGameButton);
       this.updateWinCount(this.secondPlayer);
     } else if (player === this.firstPlayer) {
-      renderMsg(this.firstPlayer);
-      reveal(stackTwo);
-      this.secondPlayer.hand.push(this.firstPlayer.badSlap(this.firstPlayer));
+      invalidSlap(player);
     } else if (player === this.secondPlayer && this.cardsInDiscardPile.length !== 0 && this.firstPlayer.hand.length !== 0 && this.checkValidity()) {
-      renderMsg(this.secondPlayer);
-      cloak(discardPile);
-      reveal(stackTwo);
-      this.secondPlayer.takePile(this, this.secondPlayer);
+      validSlap(player);
     } else if (player === this.secondPlayer && this.cardsInDiscardPile.length !== 0 && this.firstPlayer.hand.length === 0 && this.checkForJack()) {
-      cloak(discardPile);
-      reveal(newGameButton);
-      this.updateWinCount(player);
+      winGame(player);
     } else if (player === this.secondPlayer && player.hand.length === 0) {
-      cloak(discardPile);
       reveal(newGameButton);
       this.updateWinCount(this.firstPlayer);
     } else if (player === this.secondPlayer) {
-      renderMsg(this.secondPlayer);
-      reveal(stackOne);
-      this.firstPlayer.hand.push(this.secondPlayer.badSlap(this.secondPlayer));
+      invalidSlap(player);
     }
   }
 
@@ -140,10 +121,10 @@ class Game {
   }
 
   updateWinCount(player) {
-    if (player === this.firstPlayer) {
+    if (player == this.firstPlayer) {
       this.firstPlayer.wins++;
       renderWin(player);
-    } else if (player === this.secondPlayer) {
+    } else if (player == this.secondPlayer) {
       this.secondPlayer.wins++;
       renderWin(player);
     }
