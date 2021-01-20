@@ -77,11 +77,15 @@ class Game {
   }
 
   updateWinCount(player) {
-    if (player == this.firstPlayer) {
-      this.firstPlayer.wins++;
+    if (player === this.firstPlayer) {
+      var oldWins = localStorage.getItem('firstPlayerWins')
+      this.firstPlayer.wins = JSON.parse(oldWins) + 1;
+      this.firstPlayer.saveWinsToStorage(player);
       renderWin(player);
-    } else if (player == this.secondPlayer) {
-      this.secondPlayer.wins++;
+    } else if (player === this.secondPlayer) {
+      var oldWins = localStorage.getItem('secondPlayerWins');
+      this.secondPlayer.wins = JSON.parse(oldWins) + 1;
+      this.secondPlayer.saveWinsToStorage(player);
       renderWin(player);
     }
   }
