@@ -3,34 +3,35 @@ class Game {
     this.firstPlayer = new Player();
     this.secondPlayer = new Player();
     this.allCards = allCards;
-    this.cardsInPlay = [];
+    this.shuffledCards = [];
     this.cardsInDiscardPile = [];
-    this.currentTurn;
+    this.currentTurn = this.firstPlayer;
   }
 
   shuffleDeck(cardDeck) {
-    if (this.cardsInPlay.length === 0) {
+    if (this.shuffledCards.length === 0) {
       for (var i = cardDeck.length - 1; i >= 0; i--) {
         var randomIndex = Math.floor(Math.random() * (i + 1));
         [cardDeck[i], cardDeck[randomIndex]] = [cardDeck[randomIndex], cardDeck[i]];
-        this.cardsInPlay.push(cardDeck[i]);
+        this.shuffledCards.push(cardDeck[i]);
       }
     }
   }
 
   dealCards() {
-    if (this.cardsInPlay.length !== 0) {
-      var currentDeck = this.cardsInPlay;
-      for (var i = 0; i < currentDeck.length; i + 2) {
-        this.firstPlayer.hand.push(currentDeck[i]);
-        currentDeck.splice(i, 1);
-        this.secondPlayer.hand.push(currentDeck[i]);
-        currentDeck.splice(i, 1);
+    if (this.shuffledCards.length !== 0) {
+      var shuffledDeck = this.shuffledCards;
+      for (var i = 0; i < shuffledDeck.length; i + 2) {
+        this.firstPlayer.hand.push(shuffledDeck[i]);
+        shuffledDeck.splice(i, 1);
+        this.secondPlayer.hand.push(shuffledDeck[i]);
+        shuffledDeck.splice(i, 1);
       }
     }
   }
 
   resetGame() {
+    cloak(discardPile);
     startNewGame();
   }
 
@@ -40,8 +41,8 @@ class Game {
     if (player === this.firstPlayer && player.hand.length !== 0 && this.currentTurn === player) {
       this.cardsInDiscardPile.push(this.firstPlayer.playCard());
       this.currentTurn = this.secondPlayer;
-      this.checkTurn(player);
       renderDiscard();
+      this.checkTurn(player);
       cloak(gameMsgBox);
     } else if (player === this.secondPlayer && player.hand.length !== 0 && this.currentTurn === player) {
       this.cardsInDiscardPile.push(this.secondPlayer.playCard());
@@ -153,5 +154,16 @@ class Game {
     }
   }
 
+//Shuffle discard pile and give it back to last player
+  // var shuffleDiscardPile = this.shuffleDeck(this.cardsInDiscardPile);
+  // this.cardsInDiscardPile = [];
+  // player.hand = this.shuffledCards;
+  // this.shuffledCards = [];
+  // cloak(discardPile);
+  // if (this.currentTurn === this.firstPlayer) {
+  //   reveal(stackOne);
+  // } else if (this.currentTurn === this.secondPlayer) {
+  //   reveal(stackTwo);
+  // }
 
 }

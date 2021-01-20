@@ -21,7 +21,6 @@ function startNewGame() {
   newGame = new Game();
   newGame.shuffleDeck(newGame.allCards);
   newGame.dealCards();
-  newGame.currentTurn = newGame.firstPlayer;
 };
 
 function cloak(element) {
