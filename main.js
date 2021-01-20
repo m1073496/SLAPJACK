@@ -14,7 +14,6 @@ document.addEventListener('keydown', checkPlayerMove);
 window.addEventListener('load', startNewGame);
 newGameButton.addEventListener('click', startNewGame);
 
-
 //Functions
 function startNewGame() {
   newGame = new Game();
