@@ -11,7 +11,6 @@ class Player {
   }
 
   saveWinsToStorage() {
-    //this will save this.wins value to local storage
   }
 
   takePile(game, player) {
@@ -22,5 +21,4 @@ class Player {
     var removedCard = player.hand.splice(0, 1);
     return removedCard.toString();
   }
-
 }

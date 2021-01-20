@@ -47,7 +47,6 @@ function checkPlayerMove(e) {
   }
 };
 
-
 function renderDiscard() {
   reveal(discardPile);
   cloak(gameMsgBox);
