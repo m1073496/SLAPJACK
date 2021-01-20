@@ -67,24 +67,10 @@ class Game {
 
 
   slapCards(player) {
-    if (player === this.firstPlayer && this.cardsInDiscardPile.length !== 0 && this.secondPlayer.hand.length !== 0 && checkValidity()) {
-      validSlap(player);
-    } else if (player === this.firstPlayer && this.cardsInDiscardPile.length !== 0 && this.secondPlayer.hand.length === 0 && checkForJack()) {
-      winGame(player);
-    } else if (player === this.firstPlayer && player.hand.length === 0) {
-      reveal(newGameButton);
-      this.updateWinCount(this.secondPlayer);
-    } else if (player === this.firstPlayer) {
-      invalidSlap(player);
-    } else if (player === this.secondPlayer && this.cardsInDiscardPile.length !== 0 && this.firstPlayer.hand.length !== 0 && checkValidity()) {
-      validSlap(player);
-    } else if (player === this.secondPlayer && this.cardsInDiscardPile.length !== 0 && this.firstPlayer.hand.length === 0 && checkForJack()) {
-      winGame(player);
-    } else if (player === this.secondPlayer && player.hand.length === 0) {
-      reveal(newGameButton);
-      this.updateWinCount(this.firstPlayer);
+    if (player === this.firstPlayer) {
+      checkPlayerOneSlap(player);
     } else if (player === this.secondPlayer) {
-      invalidSlap(player);
+      checkPlayerTwoSlap(player);
     }
   }
 

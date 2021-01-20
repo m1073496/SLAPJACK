@@ -85,8 +85,33 @@ function findPlayerNum(player) {
   };
 }
 
+function checkPlayerOneSlap(player) {
+  if (newGame.cardsInDiscardPile.length !== 0 && newGame.secondPlayer.hand.length !== 0 && checkValidity()) {
+    validSlap(player);
+  } else if (newGame.cardsInDiscardPile.length !== 0 && newGame.secondPlayer.hand.length === 0 && checkForJack()) {
+    winGame(player);
+  } else if (player.hand.length === 0) {
+    reveal(newGameButton);
+    newGame.updateWinCount(newGame.secondPlayer);
+  } else {
+    invalidSlap(player);
+  }
+}
 
- function checkValidity() {
+function checkPlayerTwoSlap(player) {
+  if (newGame.cardsInDiscardPile.length !== 0 && newGame.firstPlayer.hand.length !== 0 && checkValidity()) {
+    validSlap(player);
+  } else if (newGame.cardsInDiscardPile.length !== 0 && newGame.firstPlayer.hand.length === 0 && checkForJack()) {
+    winGame(player);
+  } else if (player.hand.length === 0) {
+    reveal(newGameButton);
+    newGame.updateWinCount(newGame.firstPlayer);
+  } else {
+    invalidSlap(player);
+  }
+}
+
+function checkValidity() {
     if (newGame.cardsInDiscardPile.length >= 3) {
       return (checkForJack() || checkForDoubles() || checkForSandwich());
     } else if (newGame.cardsInDiscardPile.length >= 2) {
@@ -96,13 +121,13 @@ function findPlayerNum(player) {
     }
   }
 
-  function checkForJack() {
+function checkForJack() {
     var topCard = newGame.cardsInDiscardPile[newGame.cardsInDiscardPile.length - 1];
     var splitString = topCard.split('-');
     return (splitString[1] === 'jack');
   }
 
-  function checkForDoubles() {
+function checkForDoubles() {
     var topCard = newGame.cardsInDiscardPile[newGame.cardsInDiscardPile.length - 1];
     var secondCard = newGame.cardsInDiscardPile[newGame.cardsInDiscardPile.length - 2];
     var splitFirst = topCard.split('-');
@@ -110,7 +135,7 @@ function findPlayerNum(player) {
     return (splitFirst[1] === splitSecond[1]);
   }
 
-  function checkForSandwich() {
+function checkForSandwich() {
     var topCard = newGame.cardsInDiscardPile[newGame.cardsInDiscardPile.length - 1];
     var thirdCard = newGame.cardsInDiscardPile[newGame.cardsInDiscardPile.length - 3];
     var splitFirst = topCard.split('-');
