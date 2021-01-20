@@ -1,6 +1,6 @@
 body, html {
   margin: 0;
-  height: 100vh;
+  height: 100%;
 }
 
 body {
@@ -8,7 +8,6 @@ body {
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-  height: 100%;
 }
 
 .header {
@@ -28,9 +27,9 @@ body {
 }
 
 .msg {
+  color: white;
   padding: 1rem;
   text-align: center;
-  color: white;
 }
 
 .main {
@@ -40,7 +39,6 @@ body {
 
 .card-stacks-container {
   display: flex;
-  flex-direction: row;
   justify-content: space-around;
   height: 50vh;
   align-items: center;
@@ -84,23 +82,13 @@ body {
 .new-game-button {
   align-self: center;
   background-color: white;
+  opacity: 80%;
   border-radius: 5px;
   border: none;
   height: 10vh;
   width: 25vh;
-  margin-top: 10vh;
+  margin-top: 5vh;
 }
-
-
-
-
-
-
-
-
-
-
-
 
 .hidden {
   visibility: hidden;
