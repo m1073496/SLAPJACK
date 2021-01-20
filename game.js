@@ -56,7 +56,9 @@ class Game {
       this.currentTurn = player;
       cloak(stackOne);
       cloak(stackTwo);
+      cloak(discardPile);
       shuffleDiscardPile(player);
+      renderPlayerDeck(player);
     } else if (firstHand === 0 && secondHand !== 0) {
       this.currentTurn = this.secondPlayer;
       cloak(stackOne);

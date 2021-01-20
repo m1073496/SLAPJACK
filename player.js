@@ -15,13 +15,7 @@ class Player {
   }
 
   takePile(game, player) {
-    for (var i = 0; i < game.cardsInDiscardPile.length; i++) {
-      player.hand.push(game.cardsInDiscardPile[i]);
-    }
-    game.shuffleDeck(player.hand);
-    player.hand = game.shuffledCards;
-    game.shuffledCards = [];
-    game.cardsInDiscardPile = [];
+    shuffleDiscardPile(player);
   }
 
   badSlap(player) {

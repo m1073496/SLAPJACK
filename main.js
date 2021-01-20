@@ -189,19 +189,12 @@ function shuffleDiscardPile(player) {
   player.hand.shuffledCards;
   newGame.shuffledCards = [];
   newGame.cardsInDiscardPile = [];
+}
 
-
-
-    // var shuffledPile = newGame.shuffleDeck(newGame.cardsInDiscardPile);
-    // game.player.hand.push(game)
-    // this.cardsInDiscardPile = [];
-    // player.hand = this.shuffledCards;
-    // this.shuffledCards = [];
-    // cloak(discardPile);
-    // if (this.currentTurn === this.firstPlayer) {
-    //   reveal(stackOne);
-    // } else if (this.currentTurn === this.secondPlayer) {
-    //   reveal(stackTwo);
-    // }
-
+function renderPlayerDeck(player) {
+  if (findPlayerNum(player).playerNum === 1) {
+    reveal(stackOne);
+  } else if (findPlayerNum(player).playerNum === 2) {
+    reveal(stackTwo);
+  }
 }
