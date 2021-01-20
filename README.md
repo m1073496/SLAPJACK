@@ -84,7 +84,7 @@ When a user sees a Jack on top of the discard pile, or two cards of the same num
 
 When one player runs out of cards, the other player has a chance to win the game if they either slap a Jack or if the player without cards makes an invalid slap. When one player is out of cards, the only valid slap remaining is a Jack. If the player with cards discards all their remaining cards wihthout turning up a jack, the discard pile will be shuffled and added to their hand. When a player wins, a message is displayed, their win count increases by 1, and they have the option to start a new game by pressing a button.
 
-<img width="1436" alt="Screen Shot 2021-01-19 at 8 53 31 PM" src="https://user-images.githubusercontent.com/73088654/105125010-9f5af800-5a98-11eb-9f5a-e56c83619d73.png">
+<img width="1430" alt="Screen Shot 2021-01-19 at 9 00 29 PM" src="https://user-images.githubusercontent.com/73088654/105125357-6bcc9d80-5a99-11eb-9bf0-7c2a38c6b9d0.png">
 
 
 ---
