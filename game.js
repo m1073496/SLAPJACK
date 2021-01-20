@@ -39,13 +39,13 @@ class Game {
     if (player === this.firstPlayer && player.hand.length !== 0 && this.currentTurn === player) {
       this.cardsInDiscardPile.push(this.firstPlayer.playCard());
       this.currentTurn = this.secondPlayer;
-      this.checkTurn(player);
       renderDiscard();
+      this.checkTurn(player);
     } else if (player === this.secondPlayer && player.hand.length !== 0 && this.currentTurn === player) {
       this.cardsInDiscardPile.push(this.secondPlayer.playCard());
       this.currentTurn = this.firstPlayer;
-      this.checkTurn(player);
       renderDiscard();
+      this.checkTurn(player);
     }
   }
 
@@ -56,6 +56,7 @@ class Game {
       this.currentTurn = player;
       cloak(stackOne);
       cloak(stackTwo);
+      shuffleDiscardPile(player);
     } else if (firstHand === 0 && secondHand !== 0) {
       this.currentTurn = this.secondPlayer;
       cloak(stackOne);
@@ -64,7 +65,6 @@ class Game {
       cloak(stackTwo);
     }
   }
-
 
   slapCards(player) {
     if (player === this.firstPlayer) {
@@ -83,17 +83,5 @@ class Game {
       renderWin(player);
     }
   }
-
-//Shuffle discard pile and give it back to last player
-  // var shuffleDiscardPile = this.shuffleDeck(this.cardsInDiscardPile);
-  // this.cardsInDiscardPile = [];
-  // player.hand = this.shuffledCards;
-  // this.shuffledCards = [];
-  // cloak(discardPile);
-  // if (this.currentTurn === this.firstPlayer) {
-  //   reveal(stackOne);
-  // } else if (this.currentTurn === this.secondPlayer) {
-  //   reveal(stackTwo);
-  // }
 
 }
