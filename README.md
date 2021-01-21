@@ -15,6 +15,9 @@ A Front-End Project by [Jessica Justice](https://github.com/m1073496)
 
 This is a Turing School of Software and Design Module 1 solo project. My task was to create the game 'SlapJack' from scratch, which involved building out HTML, CSS and multiple Javascript files. Stringent logic was required to handle all game rules and varying scenarios, capture all possible player interaction (within the scope of the game), and to display all relevant DOM elements at the appropriate times in order to promote seamless gameplay.
 
+**Deploy app here:**
+https://m1073496.github.io/SLAPJACK/
+
 **Gameplay:**
 
  - Players will alternate turns by default, playing cards face-up into the central discard pile
@@ -64,7 +67,6 @@ This is a Turing School of Software and Design Module 1 solo project. My task wa
 * Javascript
 * Git
 * GitHub
-* GitHub Pages: [](https://m1073496.github.io/SLAPJACK/)
 
 ---
 ## Features
