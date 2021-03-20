@@ -8,7 +8,7 @@ A Front-End Project by [Jessica Justice](https://github.com/m1073496).
 2. [Learning Goals](#learning-goals)
 3. [Technologies](#technologies)
 4. [Features](#features)
-7. [Future Additions](#future-additions)
+7. [Future Iterations](#future-iterations)
 
 
 ## Overview
@@ -110,7 +110,7 @@ When one player is out of cards, the only valid slap remaining for both players 
 
 
 ---
-## Future Additions
+## Future Iterations
 
 * Instructions appear upon page load that explain the game rules and player controls
 * Input forms to capture player names and display them by their corresponding card stacks
