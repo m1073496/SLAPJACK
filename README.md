@@ -1,7 +1,7 @@
 # SLAPJACK
 
-A Front-End Project by [Jessica Justice](https://github.com/m1073496)
-* Project Manager: [Scott Ertmer](https://github.com/sertmer)
+A Front-End Project by [Jessica Justice](https://github.com/m1073496).
+* Project Manager: [Scott Ertmer](https://github.com/sertmer).
 
 
 1. [Overview](#overview)
@@ -13,10 +13,10 @@ A Front-End Project by [Jessica Justice](https://github.com/m1073496)
 
 ## Overview
 
-This is a Turing School of Software and Design Module 1 solo project. My task was to create the game 'SlapJack' from scratch, which involved building out HTML, CSS and multiple Javascript files. Stringent logic was required to handle all game rules and varying scenarios, capture all possible player interaction (within the scope of the game), and to display all relevant DOM elements at the appropriate times in order to promote seamless gameplay.
+This is a Turing School of Software and Design - Module 1 solo project.
 
-**Deploy app here:**
-https://m1073496.github.io/SLAPJACK/
+My task was to create the game 'SlapJack' from scratch, which involved building out HTML, CSS and multiple Javascript files. Stringent logic was required to handle all game rules and varying scenarios, capture all possible player interaction (within the scope of the game), and to display all relevant DOM elements at the appropriate times in order to promote seamless gameplay.
+
 
 **Gameplay:**
 
@@ -45,6 +45,10 @@ https://m1073496.github.io/SLAPJACK/
    * If, however, the player who is out of cards slaps something that is not a Jack, they lose!
  
    * If the player who still has cards slaps the Jack first, they win!
+
+
+
+[Play SLAPJACK](https://m1073496.github.io/SLAPJACK/)
  
 
 
@@ -64,7 +68,7 @@ https://m1073496.github.io/SLAPJACK/
 
 * HTML
 * CSS
-* Javascript
+* Vanilla JavaScript
 * Git
 * GitHub
 
