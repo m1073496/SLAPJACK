@@ -1,9 +1,9 @@
 # SLAPJACK
 
+## [Play SLAPJACK](https://m1073496.github.io/SLAPJACK/)
+
 A Front-End Project by [Jessica Justice](https://github.com/m1073496).
 * Project Manager: [Scott Ertmer](https://github.com/sertmer).
-
-[Play SLAPJACK](https://m1073496.github.io/SLAPJACK/)
 
 
 1. [Overview](#overview)
