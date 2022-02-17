@@ -3,6 +3,8 @@
 A Front-End Project by [Jessica Justice](https://github.com/m1073496).
 * Project Manager: [Scott Ertmer](https://github.com/sertmer).
 
+[Play SLAPJACK](https://m1073496.github.io/SLAPJACK/)
+
 
 1. [Overview](#overview)
 2. [Learning Goals](#learning-goals)
@@ -45,10 +47,6 @@ My task was to create the game 'SlapJack' from scratch, which involved building 
    * If, however, the player who is out of cards slaps something that is not a Jack, they lose!
  
    * If the player who still has cards slaps the Jack first, they win!
-
-
-
-[Play SLAPJACK](https://m1073496.github.io/SLAPJACK/)
  
 
 
